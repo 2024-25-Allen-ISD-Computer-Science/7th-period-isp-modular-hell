@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +10,9 @@ public class Game1 : Game
 {
     Texture2D ballTexture;
 
+    private InputState inputState = new InputState();
+    private Keys[] pressedKeys;
+    private Character character = new Character();
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
@@ -36,10 +41,11 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+        pressedKeys = inputState.UpdatePressedKeys();
+        character.Update();
 
-        // TODO: Add your update logic here
+        
+       
 
         base.Update(gameTime);
     }
