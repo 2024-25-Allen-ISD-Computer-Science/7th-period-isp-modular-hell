@@ -25,6 +25,19 @@ namespace ModularHell
 
             if (pressedKeys.Contains(Keys.Left)) {
                 System.Console.WriteLine("Left");
+                character.MoveX(-10);
+            }
+            if (pressedKeys.Contains(Keys.Right)) {
+            System.Console.WriteLine("Right");
+            character.MoveX(10);
+            }
+            if (pressedKeys.Contains(Keys.Down)) {
+            System.Console.WriteLine("Down");
+            character.MoveY(10);
+            }
+            if (pressedKeys.Contains(Keys.Up)) {
+            System.Console.WriteLine("Up");
+            character.MoveY(-10);
             }
         }
 

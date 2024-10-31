@@ -9,6 +9,7 @@ namespace ModularHell;
 public class Game1 : Game
 {
     Texture2D ballTexture;
+    Texture2D characterTexture;
 
     private InputState inputState = new InputState();
     private Keys[] pressedKeys;
@@ -37,6 +38,9 @@ public class Game1 : Game
 
         // TODO: use this.Content to load your game content here
         ballTexture = this.Content.Load<Texture2D>("ball");
+
+        //THIS NEEDS TO BE MOVED TO THE CHARACTER FUNCTION
+        characterTexture = this.Content.Load<Texture2D>("CharacterHead1");
     }
 
     protected override void Update(GameTime gameTime)
@@ -56,6 +60,11 @@ public class Game1 : Game
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
         _spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.White);
+
+        //THIS NEEDS TO BE MOVED TO THE CHARACTER FUNCTION
+        _spriteBatch.Draw(characterTexture, character.Position, Color.White);
+
+
         _spriteBatch.End();
 
         base.Draw(gameTime);
