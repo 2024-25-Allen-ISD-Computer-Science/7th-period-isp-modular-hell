@@ -21,7 +21,7 @@ namespace ModularHell
         public void Update(Character character)
         {
             pressedKeys = inputState.UpdatePressedKeys();
-            character.Update();
+            
 
             if (pressedKeys.Contains(Keys.Left)) {
                 System.Console.WriteLine("Left");
