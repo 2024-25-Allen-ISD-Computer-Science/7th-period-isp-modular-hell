@@ -78,3 +78,4 @@ C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\obj
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\obj\Debug\net8.0\ModularHell.pdb
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\obj\Debug\net8.0\ModularHell.genruntimeconfig.cache
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\obj\Debug\net8.0\ref\ModularHell.dll
+C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\CharacterHead1.xnb
