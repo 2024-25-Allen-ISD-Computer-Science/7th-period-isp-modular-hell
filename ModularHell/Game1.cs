@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,12 +10,9 @@ namespace ModularHell;
 
 public class Game1 : Game
 {
-    Texture2D ballTexture;
-    Texture2D characterTexture;
 
     private InputState inputState = new InputState();
     private Keys[] pressedKeys;
-    private Character character = new Character();
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
@@ -27,7 +26,10 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
+        //Sets screen size to .Dimensions set in ScreenManager
+        _graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
+        _graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
+        _graphics.ApplyChanges();
 
         base.Initialize();
     }
@@ -36,20 +38,18 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // TODO: use this.Content to load your game content here
-        ballTexture = this.Content.Load<Texture2D>("ball");
-
-        //THIS NEEDS TO BE MOVED TO THE CHARACTER FUNCTION
-        characterTexture = this.Content.Load<Texture2D>("CharacterHead1");
+        ScreenManager.Instance.LoadContent(Content);
     }
 
     protected override void Update(GameTime gameTime)
     {
         pressedKeys = inputState.UpdatePressedKeys();
-        character.Update();
+        //exits game
+        if (pressedKeys.Contains(Keys.Escape))
+            this.Exit();
 
-        
-       
+
+        ScreenManager.Instance.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -57,16 +57,12 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        // TODO: Add your drawing code here
+        
         _spriteBatch.Begin();
-        _spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.White);
-
-        //THIS NEEDS TO BE MOVED TO THE CHARACTER FUNCTION
-        _spriteBatch.Draw(characterTexture, character.Position, Color.White);
-
-
+        ScreenManager.Instance.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
     }
+
 }

@@ -13,10 +13,6 @@ namespace ModularHell
         private Keys[] pressedKeys;
 
         
-        public void TestMethod()
-        {
-            Console.WriteLine("Hello");
-        }
         
         public void Update(Character character)
         {
