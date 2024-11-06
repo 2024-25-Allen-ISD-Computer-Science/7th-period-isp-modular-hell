@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 namespace ModularHell;
 
 public class Game1 : Game
 {
-
-    private InputState inputState = new InputState();
-    private Keys[] pressedKeys;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
@@ -43,9 +40,8 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        pressedKeys = inputState.UpdatePressedKeys();
         //exits game
-        if (pressedKeys.Contains(Keys.Escape))
+        if (InputHandler.HoldingKey(Keys.Escape))
             this.Exit();
 
 
