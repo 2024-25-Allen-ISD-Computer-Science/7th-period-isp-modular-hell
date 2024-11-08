@@ -11,13 +11,11 @@ namespace ModularHell
     public class Character : Entity
     {
 
+        private EntityAttachment NeckSlot;
+        
         public Character() {
             _position = new Vector2(0,0);
-            _attachmentSlots = new List<EntityAttachment>();
-            _MaxAttachments = 2;
-            //temp
-            if (_attachmentSlots.Count <= _MaxAttachments)
-                _attachmentSlots.Add(new StickLeg(this));
+            NeckSlot = new Leg(this, "bruh");
         }
         
         public override void LoadContent()
@@ -25,8 +23,8 @@ namespace ModularHell
             base.LoadContent();
             _entityTexture = Content.Load<Texture2D>("CharacterHead1");
 
-            foreach (EntityAttachment attachment in _attachmentSlots)
-                attachment.LoadContent();
+            //foreach (EntityAttachment attachment in _attachmentSlots)
+              //  attachment.LoadContent();
         }
 
         public override void UnloadContent()
@@ -36,19 +34,32 @@ namespace ModularHell
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            foreach (EntityAttachment attachment in _attachmentSlots)
-                attachment.Update(gameTime);
-
+           // foreach (EntityAttachment attachment in _attachmentSlots)
+           //     attachment.Update(gameTime);
+            
+            doMovement();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
 
-            foreach (EntityAttachment attachment in _attachmentSlots)
-                attachment.Draw(spriteBatch);
+           // foreach (EntityAttachment attachment in _attachmentSlots)
+            //    attachment.Draw(spriteBatch);
 
             spriteBatch.Draw(_entityTexture, this._position, Color.White);
+        }
+
+        private void doMovement() 
+        {
+            if (InputHandler.HoldingKey(Keys.Right))
+                this.MoveX(10);
+            if (InputHandler.HoldingKey(Keys.Left))
+                this.MoveX(-10);
+            if (InputHandler.HoldingKey(Keys.Up))
+                this.MoveY(-10);
+            if (InputHandler.HoldingKey(Keys.Down))
+                this.MoveY(10);
         }
     };
 };

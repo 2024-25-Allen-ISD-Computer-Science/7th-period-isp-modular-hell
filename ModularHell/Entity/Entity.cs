@@ -11,11 +11,9 @@ namespace ModularHell
 {
     public class Entity
     {
-        protected byte _MaxAttachments;
         protected Texture2D _entityTexture;
         public Vector2 _position;
         protected static ContentManager Content;
-        protected List<EntityAttachment> _attachmentSlots;
 
         public virtual void LoadContent()
         {
