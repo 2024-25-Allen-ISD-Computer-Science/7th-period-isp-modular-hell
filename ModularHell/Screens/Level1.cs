@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -11,13 +12,14 @@ namespace ModularHell
     public class Level1 : GameScreen
     {
         private Texture2D ballTexture;
+        public string path;
 
         Entity Character;
-
+        
         public override void LoadContent()
         {
             base.LoadContent();
-            ballTexture = content.Load<Texture2D>("ball");
+            ballTexture = Content.Load<Texture2D>(path);
 
             Character = new Character();
             Character.LoadContent();
@@ -26,7 +28,7 @@ namespace ModularHell
         public override void UnloadContent()
         {
             base.UnloadContent();
-            content.Unload();
+            Content.Unload();
 
             Character.UnloadContent();
         }
