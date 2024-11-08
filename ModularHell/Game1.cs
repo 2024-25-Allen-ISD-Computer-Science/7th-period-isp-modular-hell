@@ -38,6 +38,10 @@ public class Game1 : Game
         ScreenManager.Instance.LoadContent(Content);
     }
 
+    protected override void UnloadContent()
+    {
+        ScreenManager.Instance.UnloadContent();
+    }
     protected override void Update(GameTime gameTime)
     {
         //exits game
