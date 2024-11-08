@@ -15,7 +15,8 @@ namespace ModularHell
         
         public Character() {
             _position = new Vector2(0,0);
-            NeckSlot = new Leg(this, "bruh");
+            NeckSlot = new EntityAttachment(this, "bruh");
+            NeckSlot.LoadMethods();
         }
         
         public override void LoadContent()
