@@ -8,6 +8,10 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ModularHell
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\
+=======
+build_property.ProjectDir = C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\
+>>>>>>> ea4adc95c6d39768a1357acb6d740643497ae19f
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
