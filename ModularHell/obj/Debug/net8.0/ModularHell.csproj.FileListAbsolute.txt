@@ -108,3 +108,8 @@ C:\Users\Cole\Documents\MODULARHELL\7th-period-isp-modular-hell\ModularHell\obj\
 C:\Users\Cole\Documents\MODULARHELL\7th-period-isp-modular-hell\ModularHell\obj\Debug\net8.0\ModularHell.genruntimeconfig.cache
 C:\Users\Cole\Documents\MODULARHELL\7th-period-isp-modular-hell\ModularHell\obj\Debug\net8.0\ref\ModularHell.dll
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\CharacterHead1.xnb
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Arm.xnb
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\CharacterLeg1.xnb
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Head.xnb
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Leg.xnb
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Torso.xnb
