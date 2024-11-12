@@ -11,12 +11,15 @@ namespace ModularHell
     public class Character : Entity
     {
 
+        private int _moveSpeed;
+
         private EntityAttachment NeckSlot;
         
         public Character() {
             _position = new Vector2(0,0);
             NeckSlot = new EntityAttachment(this, "bruh");
             NeckSlot.LoadMethods();
+            _moveSpeed = 200;
         }
         
         public override void LoadContent()
@@ -54,13 +57,13 @@ namespace ModularHell
         private void doMovement() 
         {
             if (InputHandler.HoldingKey(Keys.Right))
-                this.MoveX(10);
+                this._velocity.X = _moveSpeed;
             if (InputHandler.HoldingKey(Keys.Left))
-                this.MoveX(-10);
+                this._velocity.X = -_moveSpeed;
             if (InputHandler.HoldingKey(Keys.Up))
-                this.MoveY(-10);
+                this._velocity.Y = -_moveSpeed;
             if (InputHandler.HoldingKey(Keys.Down))
-                this.MoveY(10);
+                this._velocity.Y = _moveSpeed;
         }
     };
 };
