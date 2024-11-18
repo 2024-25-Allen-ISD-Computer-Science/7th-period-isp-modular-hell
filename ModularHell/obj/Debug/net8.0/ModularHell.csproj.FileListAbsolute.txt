@@ -118,3 +118,8 @@ C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Head.xnb
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Leg.xnb
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Content\Torso.xnb
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Character.xml
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Screens\Load\Level1.xml
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\DefaultArm.xml
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Torso.xml
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Attachments.xml
