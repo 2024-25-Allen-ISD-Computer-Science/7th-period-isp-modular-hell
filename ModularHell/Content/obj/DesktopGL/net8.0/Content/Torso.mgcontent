@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Torso.png</SourceFile>
-  <SourceTime>2024-11-12T15:00:24.7205403-06:00</SourceTime>
-  <DestFile>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/bin/DesktopGL/Content/Torso.xnb</DestFile>
-  <DestTime>2024-11-12T15:07:43.2758766-06:00</DestTime>
+  <SourceFile>C:/Users/Ninte/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Torso.png</SourceFile>
+  <SourceTime>2024-11-12T14:49:04.9924749-06:00</SourceTime>
+  <DestFile>C:/Users/Ninte/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/bin/DesktopGL/Content/Torso.xnb</DestFile>
+  <DestTime>2024-11-12T15:11:36.3013148-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T12:05:56-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

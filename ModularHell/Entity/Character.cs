@@ -52,7 +52,12 @@ namespace ModularHell
            // foreach (EntityAttachment attachment in _attachmentSlots)
             //    attachment.Draw(spriteBatch);
 
-            spriteBatch.Draw(_entityTexture, this._position, Color.White);
+            Texture2D torsoTexture = Content.Load<Texture2D>("Torso");
+            Rectangle torsoRect = new Rectangle(0,0, 1000, 1000);
+            spriteBatch.Draw(torsoTexture, new Vector2(this._position.X, this._position.Y + 60), torsoRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.1f);
+
+            Rectangle headRect = new Rectangle(10,10, 1000, 1000);
+            spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.0f);
         }
 
         private void doMovement() 
