@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -12,10 +13,21 @@ namespace ModularHell
     public class Entity
     {
         protected Texture2D _entityTexture;
+        public string texturePath;
 
+        [XmlIgnore]
         public Vector2 _velocity;
+        [XmlIgnore]
         public Vector2 _position;
         protected static ContentManager Content;
+
+        [XmlIgnore]
+        public Type Type;
+
+        public Entity()
+        {
+            Type = this.GetType();
+        }
 
         public virtual void LoadContent()
         {

@@ -12,16 +12,22 @@ namespace ModularHell
     public class Level1 : GameScreen
     {
         private Texture2D ballTexture;
-        public string path;
+        public string texturePath;
 
+        private XmlManager<Entity> xmlEntityManager;
         Entity Character;
-        
+
+        public Level1() {
+            xmlEntityManager = new XmlManager<Entity>();
+        }
         public override void LoadContent()
         {
             base.LoadContent();
-            ballTexture = Content.Load<Texture2D>(path);
+            ballTexture = Content.Load<Texture2D>(texturePath);
 
             Character = new Character();
+            xmlEntityManager.Type = Character.Type;
+            Character = xmlEntityManager.Load("Entity/Load/Character.xml");
             Character.LoadContent();
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -25,7 +26,7 @@ namespace ModularHell
         public override void LoadContent()
         {
             base.LoadContent();
-            _entityTexture = Content.Load<Texture2D>("CharacterHead1");
+            _entityTexture = Content.Load<Texture2D>(texturePath);
 
             //foreach (EntityAttachment attachment in _attachmentSlots)
               //  attachment.LoadContent();
