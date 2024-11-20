@@ -2,10 +2,10 @@
 <Torso>
     <texturePath>Torso</texturePath>
     <tags>[]</tags>
-    <lArmXml></lArmXml>
-    <rArmXml></rArmXml>
-    <lLegXml></lLegXml>
-    <rLegXml></rLegXml>
+    <lArmXML>DefaultArm</lArmXML>
+    <rArmXML>DefaultArm</rArmXML>
+    <lLegXML></lLegXML>
+    <rLegXML></rLegXML>
     <speedModifier>1.0</speedModifier>
     <damageModifier>1.0</damageModifier>
 </Torso>

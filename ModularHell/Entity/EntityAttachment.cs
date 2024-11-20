@@ -24,6 +24,7 @@ namespace ModularHell
         protected Texture2D _attachmentTexture;
         public string texturePath;
 
+        [XmlIgnore]
         private float rotation;
 
         protected ContentManager Content;
@@ -40,6 +41,7 @@ namespace ModularHell
         public virtual void LoadContent()
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
+            _attachmentTexture = Content.Load<Texture2D>(texturePath);
         }
 
         public virtual void UnloadContent()
@@ -60,11 +62,27 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset)
         {
-            Console.WriteLine("BBBBBB");
-            //rotation += 0.1f;
-            //spriteBatch.Draw(_attachmentTexture, host._position + new Vector2(0,10), Color.White);
+            Rectangle attachmentRect = new Rectangle(0,0, 1000, 1000);
+            var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 6f);
+            
+            if (host.isMoving) {
+                rotation += 0.1f;
+            }
+
+            spriteBatch.Draw(
+                _attachmentTexture, // texture
+                new Vector2(this.host._position.X + offset.X, this.host._position.Y + offset.Y), // position
+                attachmentRect, // rect
+                Color.White, // color (useful for recolors of the same attachment sprites)
+                rotation, // rotation
+                origin, // origin
+                0.1f, // scale
+                SpriteEffects.None, // sprite effects
+                0.1f // layerdepth
+                );
         }
+
     }
 }

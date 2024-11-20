@@ -24,9 +24,16 @@ namespace ModularHell
         [XmlIgnore]
         public Type Type;
 
+         [XmlIgnore]
+        public XmlManager<EntityAttachment> xmlAttachmentManager;
+
+        [XmlIgnore]
+        public bool isMoving = false;
+
         public Entity()
         {
             Type = this.GetType();
+            xmlAttachmentManager = new XmlManager<EntityAttachment>();
         }
 
         public virtual void LoadContent()
