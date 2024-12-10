@@ -16,6 +16,7 @@ namespace ModularHell
 
         private XmlManager<Entity> xmlEntityManager;
         Entity Character;
+        
 
         public Level1() {
             xmlEntityManager = new XmlManager<Entity>();
@@ -25,23 +26,30 @@ namespace ModularHell
             base.LoadContent();
             ballTexture = Content.Load<Texture2D>(texturePath);
 
-            Character = new Character();
-            xmlEntityManager.Type = Character.Type;
+
+            xmlEntityManager.Type = typeof(Character);
             Character = xmlEntityManager.Load("Entity/Load/Character.xml");
+            Character.Name = "Player1";
+            ///Character.Generate();
             Character.LoadContent();
         }
 
         public override void UnloadContent()
         {
-            base.UnloadContent();
-            Content.Unload();
-
             Character.UnloadContent();
+            base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            
+            /*
+            Force Unloader
+            if (InputHandler.HoldingKey(Keys.K)) {
+                Character.UnloadContent();
+            }
+            */
 
             Character.Update(gameTime);
         }

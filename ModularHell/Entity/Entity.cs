@@ -14,6 +14,7 @@ namespace ModularHell
     {
         protected Texture2D _entityTexture;
         public string texturePath;
+        public string Name {get; set;}
 
         [XmlIgnore]
         public Vector2 _velocity;
@@ -22,9 +23,6 @@ namespace ModularHell
         protected static ContentManager Content;
 
         [XmlIgnore]
-        public Type Type;
-
-         [XmlIgnore]
         public XmlManager<EntityAttachment> xmlAttachmentManager;
 
         [XmlIgnore]
@@ -32,17 +30,18 @@ namespace ModularHell
 
         public Entity()
         {
-            Type = this.GetType();
             xmlAttachmentManager = new XmlManager<EntityAttachment>();
         }
 
         public virtual void LoadContent()
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
+            _entityTexture = Content.Load<Texture2D>(texturePath);
         }
 
         public virtual void UnloadContent()
         {
+            
         }
 
         public virtual void Update(GameTime gameTime)
@@ -53,6 +52,10 @@ namespace ModularHell
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+        }
+
+        public virtual void Generate() {
+            LoadContent();
         }
 
         protected void doVelocity(GameTime gameTime) {

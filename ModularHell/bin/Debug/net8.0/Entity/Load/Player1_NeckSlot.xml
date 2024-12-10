@@ -4,12 +4,12 @@
   <speedModifier>1</speedModifier>
   <damageModifier>1</damageModifier>
   <texturePath>Torso</texturePath>
-  <lArmXML>DefaultArm</lArmXML>
+  <lArmXML>Player1_NeckSlot_lArm</lArmXML>
   <lArmOffset>
     <X>0</X>
     <Y>0</Y>
   </lArmOffset>
-  <rArmXML>DefaultArm</rArmXML>
+  <rArmXML>Player1_NeckSlot_rArm</rArmXML>
   <rArmOffset>
     <X>0</X>
     <Y>0</Y>

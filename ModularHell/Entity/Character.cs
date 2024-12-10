@@ -10,38 +10,33 @@ using System.Net.Mail;
 
 namespace ModularHell 
 {
+    [XmlInclude(typeof(Character))]
     public class Character : Entity
     {
 
         private int _moveSpeed = 200;
 
-
         [XmlIgnore]
         public Torso NeckSlot;
         public string NeckSlotXml;
 
-
-        
-        public Character() {
-            
-        }
-        
         public override void LoadContent()
         {
-
             base.LoadContent();
-            _entityTexture = Content.Load<Texture2D>(texturePath);
             
-            NeckSlot = new Torso();
-            xmlAttachmentManager.Type = NeckSlot.Type;
-            NeckSlot = (Torso)xmlAttachmentManager.Load("Entity/Load/" + NeckSlotXml + ".xml");
-            NeckSlot.host = this;
+            xmlAttachmentManager.Type = typeof(Torso);
+            NeckSlot = (Torso)xmlAttachmentManager.Load($"Entity/Load/{NeckSlotXml}.xml");
+            NeckSlot.Host = this;
             NeckSlot.LoadContent();
-            
         }
 
         public override void UnloadContent()
         {
+            if (!String.IsNullOrEmpty(Name))
+                xmlAttachmentManager.Type = typeof(Torso);
+                xmlAttachmentManager.Save($"Entity/Load/{NeckSlotXml}.xml", NeckSlot);
+
+            NeckSlot.UnloadContent();
         }
 
         public override void Update(GameTime gameTime) {
@@ -55,18 +50,12 @@ namespace ModularHell
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            NeckSlot.lArm.Draw(spriteBatch, new Vector2(50,80));
-
-            NeckSlot.rArm.Draw(spriteBatch, new Vector2(20, 80));
+            
             
             base.Draw(spriteBatch);
             NeckSlot.Draw(spriteBatch, new Vector2(45, 80));
             Rectangle headRect = new Rectangle(10,10, 1000, 1000);
-            spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
-
-            
-            NeckSlot.rArm.Draw(spriteBatch, new Vector2(20, 80));
-
+            spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 1.0f);
         }
 
         private void doMovement() 
@@ -93,6 +82,18 @@ namespace ModularHell
                 isMoving = true;
             }
                 
+        }
+        public override void Generate() {
+            base.LoadContent();
+
+            xmlAttachmentManager.Type = typeof(Torso);
+            NeckSlot = (Torso)xmlAttachmentManager.Load($"Entity/Load/Torso.xml");
+            NeckSlot.Host = this;
+            NeckSlot.Generate();
+
+            if (!string.IsNullOrEmpty(Name)) {
+                NeckSlotXml = $"{Name}_NeckSlot";
+            }
         }
     };
 };

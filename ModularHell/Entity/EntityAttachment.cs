@@ -13,8 +13,8 @@ namespace ModularHell
 {
     public class EntityAttachment
     {
-  
-        public Entity host {get;set;}
+        [XmlIgnore]
+        public Entity Host;
         protected List<Action> attacks = new List<Action>(); 
 
         public List<string> tags = [];
@@ -30,14 +30,11 @@ namespace ModularHell
         protected ContentManager Content;
         //public HealthComponent Health;  
         //public Vector2 PosOnEntity;
-        
-        [XmlIgnore]
-        public Type Type;
 
-        public EntityAttachment()
-        {
-            Type = this.GetType();
+        public EntityAttachment() {
+            Host = null;
         }
+        
         public virtual void LoadContent()
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
@@ -46,8 +43,9 @@ namespace ModularHell
 
         public virtual void UnloadContent()
         {
+            Content.Unload();
         }
-         public void LoadMethods()
+        public void LoadMethods()
         {
             foreach (var method in typeof(AttachmentFunctionality).GetMethods())
             {
@@ -67,22 +65,25 @@ namespace ModularHell
             Rectangle attachmentRect = new Rectangle(0,0, 1000, 1000);
             var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 6f);
             
-            if (host.isMoving) {
+            if (Host.isMoving) {
                 rotation += 0.1f;
             }
 
             spriteBatch.Draw(
                 _attachmentTexture, // texture
-                new Vector2(this.host._position.X + offset.X, this.host._position.Y + offset.Y), // position
+                new Vector2(this.Host._position.X + offset.X, this.Host._position.Y + offset.Y), // position
                 attachmentRect, // rect
                 Color.White, // color (useful for recolors of the same attachment sprites)
                 rotation, // rotation
                 origin, // origin
                 0.1f, // scale
                 SpriteEffects.None, // sprite effects
-                0.1f // layerdepth
+                0.5f // layerdepth
                 );
         }
 
+        public virtual void Generate() {
+            LoadContent();
+        }
     }
 }
