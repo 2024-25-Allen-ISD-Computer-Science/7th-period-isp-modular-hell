@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using System.Reflection.Metadata;
 
 namespace ModularHell
 {
@@ -36,9 +37,8 @@ namespace ModularHell
         {
             Dimensions = new Vector2(640, 640);
             
-            currentScreen = new Level1();
             xmlGameScreenManager = new XmlManager<GameScreen>();
-            xmlGameScreenManager.Type = currentScreen.Type;
+            xmlGameScreenManager.Type = typeof(Level1);
             currentScreen = xmlGameScreenManager.Load("Screens/Load/Level1.xml");
         }
         public void LoadContent(ContentManager passedContent)
