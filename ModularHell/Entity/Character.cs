@@ -55,17 +55,17 @@ namespace ModularHell
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            NeckSlot.lArm.Draw(spriteBatch, new Vector2(50,80));
+            NeckSlot.lArm.Draw(spriteBatch, new Vector2(50,80), 0.1f);
 
-            NeckSlot.rArm.Draw(spriteBatch, new Vector2(20, 80));
+           
             
             base.Draw(spriteBatch);
-            NeckSlot.Draw(spriteBatch, new Vector2(45, 80));
+            NeckSlot.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
             Rectangle headRect = new Rectangle(10,10, 1000, 1000);
             spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
             
-            NeckSlot.rArm.Draw(spriteBatch, new Vector2(20, 80));
+            NeckSlot.rArm.Draw(spriteBatch, new Vector2(20, 80), -0.1f);
 
         }
 

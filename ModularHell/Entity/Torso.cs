@@ -42,14 +42,14 @@ namespace ModularHell
             lArm = host.xmlAttachmentManager.Load("Entity/Load/" + lArmXML + ".xml");
             lArm.host = this.host;
             lArm.LoadContent();
+            lArm.LoadAnimation("Swing");
 
             rArm = new EntityAttachment();
             host.xmlAttachmentManager.Type = rArm.Type;
             rArm = host.xmlAttachmentManager.Load("Entity/Load/" + rArmXML + ".xml");
             rArm.host = this.host;
             rArm.LoadContent();
-
-
+            rArm.LoadAnimation("Swing");
         }
 
         public override void UnloadContent()
@@ -61,7 +61,7 @@ namespace ModularHell
         {
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 offset)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 offset, float interval)
         {
 
 

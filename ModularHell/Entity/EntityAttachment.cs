@@ -26,6 +26,10 @@ namespace ModularHell
 
         [XmlIgnore]
         private float rotation;
+        [XmlIgnore]
+        private float tick = 0.0f;
+        [XmlIgnore]
+        public Func<float, float, float> animation;
 
         protected ContentManager Content;
         //public HealthComponent Health;  
@@ -47,7 +51,7 @@ namespace ModularHell
         public virtual void UnloadContent()
         {
         }
-         public void LoadMethods()
+        public void LoadMethods()
         {
             foreach (var method in typeof(AttachmentFunctionality).GetMethods())
             {
@@ -58,17 +62,33 @@ namespace ModularHell
             }
         }
 
+        public void LoadAnimation(string name)
+        {
+            foreach (var method in typeof(Animator).GetMethods())
+            {
+                Console.WriteLine(method.Name);
+                if (method.Name == name)
+                {
+                   this.animation = new Func<float, float, float>((rotation, tick) =>
+                {
+                    return (float)method.Invoke(this, [rotation, tick]);
+                });
+                }
+            }
+        }
+
         public virtual void Update(GameTime gameTime)
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset, float interval)
         {
             Rectangle attachmentRect = new Rectangle(0,0, 1000, 1000);
             var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 6f);
             
-            if (host.isMoving) {
-                rotation += 0.1f;
+            if (animation != null){
+                tick += interval;
+                rotation = animation(rotation, tick);
             }
 
             spriteBatch.Draw(
