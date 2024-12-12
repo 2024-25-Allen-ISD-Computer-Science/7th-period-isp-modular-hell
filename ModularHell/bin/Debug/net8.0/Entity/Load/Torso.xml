@@ -5,23 +5,7 @@
   <damageModifier>1</damageModifier>
   <texturePath>Torso</texturePath>
   <lArmXML>DefaultArm</lArmXML>
-  <lArmOffset>
-    <X>0</X>
-    <Y>0</Y>
-  </lArmOffset>
   <rArmXML>DefaultArm</rArmXML>
-  <rArmOffset>
-    <X>0</X>
-    <Y>0</Y>
-  </rArmOffset>
   <lLegXML />
-  <lLegOffset>
-    <X>0</X>
-    <Y>0</Y>
-  </lLegOffset>
   <rLegXML />
-  <rLegOffset>
-    <X>0</X>
-    <Y>0</Y>
-  </rLegOffset>
 </Torso>

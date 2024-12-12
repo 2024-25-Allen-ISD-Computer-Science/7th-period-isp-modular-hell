@@ -49,7 +49,7 @@ namespace ModularHell
         {
             Content.Unload();
         }
-        public void LoadMethods()
+        
         public void LoadMethods()
         {
             foreach (var method in typeof(AttachmentFunctionality).GetMethods())
