@@ -126,3 +126,4 @@ C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1_NeckSlot.xml
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1_NeckSlot_lArm.xml
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1_NeckSlot_rArm.xml
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\DefaultLeg.xml

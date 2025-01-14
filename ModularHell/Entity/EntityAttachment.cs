@@ -82,11 +82,12 @@ namespace ModularHell
 
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset, float interval)
         {
-            Rectangle attachmentRect = new Rectangle(0,0, 1000, 1000);
-            var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 6f);
+            Rectangle attachmentRect = new Rectangle(0,0, _attachmentTexture.Width, _attachmentTexture.Height);
+            var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
             
             if (animation != null){
                 tick += interval;
+
                 rotation = animation(rotation, tick);
             }
 

@@ -6,6 +6,6 @@
   <texturePath>Torso</texturePath>
   <lArmXML>DefaultArm</lArmXML>
   <rArmXML>DefaultArm</rArmXML>
-  <lLegXML />
-  <rLegXML />
+  <lLegXML>DefaultLeg</lLegXML>
+  <rLegXML>DefaultLeg</rLegXML>
 </Torso>

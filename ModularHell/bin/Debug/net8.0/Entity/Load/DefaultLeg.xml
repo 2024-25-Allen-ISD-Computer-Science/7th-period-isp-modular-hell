@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EntityAttachment>
+    <texturePath>Leg</texturePath>
+    <tags>[]</tags>
+    <speedModifier>1</speedModifier>
+    <damageModifier>0.5</damageModifier>
+</EntityAttachment>
