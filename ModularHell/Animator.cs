@@ -15,10 +15,6 @@ namespace ModularHell
 
         public static float Swing(float rotation, float tick)
         {
-<<<<<<< HEAD:ModularHell/Animator.cs
-            //Console.WriteLine(rotation);
-=======
->>>>>>> dc2a7f39d55542dfca2158ef76133d23415b360d:ModularHell/Content/Animator.cs
             
             rotation = (float)Math.Sin(tick);
             

@@ -38,7 +38,7 @@
               <tags />
               <speedModifier>0.5</speedModifier>
               <damageModifier>1</damageModifier>
-              <texturePath>Arm</texturePath>
+              <texturePath>Leg</texturePath>
             </Item1>
             <Item2>0</Item2>
             <Item3>
@@ -52,7 +52,7 @@
               <tags />
               <speedModifier>0.5</speedModifier>
               <damageModifier>1</damageModifier>
-              <texturePath>Arm</texturePath>
+              <texturePath>Leg</texturePath>
             </Item1>
             <Item2>0</Item2>
             <Item3>
@@ -65,10 +65,6 @@
         <speedModifier>1</speedModifier>
         <damageModifier>1</damageModifier>
         <texturePath>Torso</texturePath>
-        <lArmXML>DefaultArm</lArmXML>
-        <rArmXML>DefaultArm</rArmXML>
-        <lLegXML />
-        <rLegXML />
       </Item1>
       <Item2>0</Item2>
       <Item3>

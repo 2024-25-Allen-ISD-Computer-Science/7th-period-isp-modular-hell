@@ -14,18 +14,6 @@ namespace ModularHell
 {
     public class Torso : EntityAttachment
     {
-        [XmlIgnore]
-        public EntityAttachment lArm;
-        public string lArmXML;
-        [XmlIgnore]
-        public EntityAttachment rArm;
-        public string rArmXML;
-        [XmlIgnore]
-        public EntityAttachment lLeg;
-        public string lLegXML;
-        [XmlIgnore]
-        public EntityAttachment rLeg;
-        public string rLegXML;
         //public HealthComponent Health;  
         //public Vector2 PosOnEntity;
 
@@ -35,35 +23,6 @@ namespace ModularHell
         {
             base.LoadContent();
             _attachmentTexture = Content.Load<Texture2D>(texturePath);
-
-            lLeg = new EntityAttachment();
-            Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
-            lLeg = Host.xmlAttachmentManager.Load("Entity/Load/" + lLegXML + ".xml");
-            lLeg.Host = this.Host;
-            lLeg.LoadContent();
-            lLeg.LoadAnimation("Swing");
-            
-            lArm = new EntityAttachment();
-            Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
-            //Console.WriteLine(lArmXML);
-            lArm = Host.xmlAttachmentManager.Load("Entity/Load/" + lArmXML + ".xml");
-            lArm.Host = this.Host;
-            lArm.LoadContent();
-            lArm.LoadAnimation("Swing");
-
-            rLeg = new EntityAttachment();
-            Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
-            rLeg = Host.xmlAttachmentManager.Load("Entity/Load/" + rLegXML + ".xml");
-            rLeg.Host = this.Host;
-            rLeg.LoadContent();
-            rLeg.LoadAnimation("Swing");
-
-            rArm = new EntityAttachment();
-            Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
-            rArm = Host.xmlAttachmentManager.Load("Entity/Load/" + rArmXML + ".xml");
-            rArm.Host = this.Host;
-            rArm.LoadContent();
-            rArm.LoadAnimation("Swing");
         }
 
         public override void UnloadContent()

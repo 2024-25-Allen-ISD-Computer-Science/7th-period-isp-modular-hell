@@ -42,12 +42,12 @@ namespace ModularHell
         {
             base.Update(gameTime);
             
-            /*
+            
             if (InputHandler.HoldingKey(Keys.K)) {
                 xmlEntityManager.Type = typeof(Character);
                 xmlEntityManager.Save($"Entity/Load/Player1.xml", Player1);
             }
-            */
+            
         
             Player1.Update(gameTime);
         }
