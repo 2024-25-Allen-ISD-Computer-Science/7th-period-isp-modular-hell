@@ -10,7 +10,6 @@ using System.Net.Mail;
 
 namespace ModularHell 
 {
-    [XmlInclude(typeof(Character))]
     public class Character : Entity
     {
 
@@ -20,23 +19,18 @@ namespace ModularHell
         public Torso NeckSlot;
         public string NeckSlotXml;
 
+        public Character() : base() {}
+
+        public Character(int slots = 0) : base(slots) {}
+
         public override void LoadContent()
         {
             base.LoadContent();
-            
-            xmlAttachmentManager.Type = typeof(Torso);
-            NeckSlot = (Torso)xmlAttachmentManager.Load($"Entity/Load/{NeckSlotXml}.xml");
-            NeckSlot.Host = this;
-            NeckSlot.LoadContent();
         }
 
         public override void UnloadContent()
         {
-            if (!String.IsNullOrEmpty(Name))
-                xmlAttachmentManager.Type = typeof(Torso);
-                xmlAttachmentManager.Save($"Entity/Load/{NeckSlotXml}.xml", NeckSlot);
-
-            NeckSlot.UnloadContent();
+            base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime) {
@@ -50,17 +44,15 @@ namespace ModularHell
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            NeckSlot.lArm.Draw(spriteBatch, new Vector2(50,80), 0.1f);
+            AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f);
 
-           
-            
             base.Draw(spriteBatch);
-            NeckSlot.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
-            Rectangle headRect = new Rectangle(10,10, 1000, 1000);
+            AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
+            Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
             spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
             
-            NeckSlot.rArm.Draw(spriteBatch, new Vector2(20, 80), -0.1f);
+            AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f);
 
         }
 
@@ -89,17 +81,6 @@ namespace ModularHell
             }
                 
         }
-        public override void Generate() {
-            base.LoadContent();
 
-            xmlAttachmentManager.Type = typeof(Torso);
-            NeckSlot = (Torso)xmlAttachmentManager.Load($"Entity/Load/Torso.xml");
-            NeckSlot.Host = this;
-            NeckSlot.Generate();
-
-            if (!string.IsNullOrEmpty(Name)) {
-                NeckSlotXml = $"{Name}_NeckSlot";
-            }
-        }
     };
 };

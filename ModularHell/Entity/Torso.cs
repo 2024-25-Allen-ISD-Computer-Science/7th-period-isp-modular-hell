@@ -26,19 +26,18 @@ namespace ModularHell
         [XmlIgnore]
         public EntityAttachment rLeg;
         public string rLegXML;
-
-
         //public HealthComponent Health;  
         //public Vector2 PosOnEntity;
-        
+
+        public Torso() : base(4) {
+        } //creates the 4 slots 
         public override void LoadContent()
         {
             base.LoadContent();
-            _attachmentTexture = Content.Load<Texture2D>(texturePath);
             
             lArm = new EntityAttachment();
             Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
-            Console.WriteLine(lArmXML);
+            //Console.WriteLine(lArmXML);
             lArm = Host.xmlAttachmentManager.Load("Entity/Load/" + lArmXML + ".xml");
             lArm.Host = this.Host;
             lArm.LoadContent();
@@ -92,6 +91,5 @@ namespace ModularHell
             slot.LoadContent();
         }
 
-        
     }
 }

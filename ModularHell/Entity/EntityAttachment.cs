@@ -11,10 +11,17 @@ using System.Xml.Serialization;
 
 namespace ModularHell 
 {
+    [XmlInclude(typeof(Torso))]
     public class EntityAttachment
     {
         [XmlIgnore]
         public Entity Host;
+
+        [XmlIgnore]
+        public XmlManager<EntityAttachment> xmlAttachmentManager;
+
+        public (EntityAttachment, int, Vector2)[] AttachmentSlots;
+        //      (Attachment   , Slot Tier, Position)
         protected List<Action> attacks = new List<Action>(); 
 
         public List<string> tags = [];
@@ -23,10 +30,7 @@ namespace ModularHell
         public float damageModifier = 1.0f;
         protected Texture2D _attachmentTexture;
         public string texturePath;
-
-        [XmlIgnore]
         private float rotation;
-        [XmlIgnore]
         private float tick = 0.0f;
         [XmlIgnore]
         public Func<float, float, float> animation;
@@ -36,17 +40,42 @@ namespace ModularHell
         //public Vector2 PosOnEntity;
 
         public EntityAttachment() {
+            xmlAttachmentManager = new XmlManager<EntityAttachment>();
             Host = null;
+            AttachmentSlots = new (EntityAttachment, int, Vector2)[0];
+            //default 0 attachment slots
+        }
+        public EntityAttachment(int slots = 0) {
+            xmlAttachmentManager = new XmlManager<EntityAttachment>();
+            Host = null;
+            AttachmentSlots = new (EntityAttachment, int, Vector2)[slots];
+            //default 0 attachment slots
         }
         
         public virtual void LoadContent()
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
             _attachmentTexture = Content.Load<Texture2D>(texturePath);
+
+            if (AttachmentSlots.Length > 0) {
+                foreach (var (attachment, tier, position) in AttachmentSlots){
+                    attachment.Host = this.Host;
+                    attachment.LoadContent();
+                    //temp
+                    attachment.LoadAnimation("Swing");
+                }
+            }
         }
+
+
 
         public virtual void UnloadContent()
         {
+            if (AttachmentSlots.Length > 0) {
+                for (int slot = 0; slot < AttachmentSlots.Length; slot++) {
+                    AttachmentSlots[0].Item1.UnloadContent();
+                }
+            }
             Content.Unload();
         }
         
@@ -65,7 +94,7 @@ namespace ModularHell
         {
             foreach (var method in typeof(Animator).GetMethods())
             {
-                Console.WriteLine(method.Name);
+                //Console.WriteLine(method.Name);
                 if (method.Name == name)
                 {
                    this.animation = new Func<float, float, float>((rotation, tick) =>
@@ -104,7 +133,12 @@ namespace ModularHell
         }
 
         public virtual void Generate() {
-            LoadContent();
+            for (int slot = 0; slot < AttachmentSlots.Length; slot++) {
+                AttachmentSlots[slot].Item1 = new EntityAttachment();
+                AttachmentSlots[slot].Item1.texturePath = "Arm";
+                AttachmentSlots[slot].Item1.speedModifier = 0.5f;
+                AttachmentSlots[slot].Item1.damageModifier = 1f;
+            }
         }
     }
 }

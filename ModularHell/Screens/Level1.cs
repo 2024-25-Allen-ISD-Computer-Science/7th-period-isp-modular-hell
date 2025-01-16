@@ -15,7 +15,7 @@ namespace ModularHell
         public string texturePath;
 
         private XmlManager<Entity> xmlEntityManager;
-        Entity Character;
+        Entity Player1;
         
 
         public Level1() {
@@ -28,15 +28,13 @@ namespace ModularHell
 
 
             xmlEntityManager.Type = typeof(Character);
-            Character = xmlEntityManager.Load("Entity/Load/Character.xml");
-            Character.Name = "Player1";
-            ///Character.Generate();
-            Character.LoadContent();
+            Player1 = xmlEntityManager.Load($"Entity/Load/Player1.xml");
+            Player1.LoadContent();
         }
 
         public override void UnloadContent()
         {
-            Character.UnloadContent();
+            Player1.UnloadContent();
             base.UnloadContent();
         }
 
@@ -45,13 +43,13 @@ namespace ModularHell
             base.Update(gameTime);
             
             /*
-            Force Unloader
             if (InputHandler.HoldingKey(Keys.K)) {
-                Character.UnloadContent();
+                xmlEntityManager.Type = typeof(Character);
+                xmlEntityManager.Save($"Entity/Load/Player1.xml", Player1);
             }
             */
-
-            Character.Update(gameTime);
+        
+            Player1.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -60,7 +58,16 @@ namespace ModularHell
 
             spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.White);
 
-            Character.Draw(spriteBatch);
+            Player1.Draw(spriteBatch);
+        }
+
+        public void Generate() {
+            Player1 = new Character(1);
+            Player1.texturePath = "Head";
+            Player1.AttachmentSlots = new (EntityAttachment, int, Vector2)[1];
+            Player1.Name = "Player1";
+            Player1.Generate();
+            Player1.LoadContent();
         }
     }
 }

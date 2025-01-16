@@ -13,7 +13,7 @@ namespace ModularHell
 
         public static float Swing(float rotation, float tick)
         {
-            Console.WriteLine(rotation);
+            //Console.WriteLine(rotation);
             
             rotation = (float)Math.Sin(tick);
             

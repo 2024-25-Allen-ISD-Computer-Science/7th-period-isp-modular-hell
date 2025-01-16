@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Torso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AttachmentSlots>
+    <ValueTupleOfEntityAttachmentStringInt32Vector2>
+      <Item3>0</Item3>
+      <Item4>
+        <X>0</X>
+        <Y>0</Y>
+      </Item4>
+    </ValueTupleOfEntityAttachmentStringInt32Vector2>
+    <ValueTupleOfEntityAttachmentStringInt32Vector2>
+      <Item3>0</Item3>
+      <Item4>
+        <X>0</X>
+        <Y>0</Y>
+      </Item4>
+    </ValueTupleOfEntityAttachmentStringInt32Vector2>
+    <ValueTupleOfEntityAttachmentStringInt32Vector2>
+      <Item3>0</Item3>
+      <Item4>
+        <X>0</X>
+        <Y>0</Y>
+      </Item4>
+    </ValueTupleOfEntityAttachmentStringInt32Vector2>
+    <ValueTupleOfEntityAttachmentStringInt32Vector2>
+      <Item3>0</Item3>
+      <Item4>
+        <X>0</X>
+        <Y>0</Y>
+      </Item4>
+    </ValueTupleOfEntityAttachmentStringInt32Vector2>
+  </AttachmentSlots>
   <tags />
   <speedModifier>1</speedModifier>
   <damageModifier>1</damageModifier>
@@ -8,4 +38,21 @@
   <rArmXML>DefaultArm</rArmXML>
   <lLegXML />
   <rLegXML />
+  <atach>
+    <ValueTupleOfEntityAttachmentStringInt32Vector2>
+      <Item1>
+        <AttachmentSlots />
+        <tags />
+        <speedModifier>0.5</speedModifier>
+        <damageModifier>1</damageModifier>
+        <texturePath>Arm</texturePath>
+      </Item1>
+      <Item2>DefaultArm</Item2>
+      <Item3>1</Item3>
+      <Item4>
+        <X>100</X>
+        <Y>200</Y>
+      </Item4>
+    </ValueTupleOfEntityAttachmentStringInt32Vector2>
+  </atach>
 </Torso>
