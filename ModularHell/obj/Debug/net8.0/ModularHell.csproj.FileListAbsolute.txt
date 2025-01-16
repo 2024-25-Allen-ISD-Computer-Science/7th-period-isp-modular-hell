@@ -126,10 +126,4 @@ C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1_NeckSlot.xml
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1_NeckSlot_lArm.xml
 C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1_NeckSlot_rArm.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Attachments.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Character.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\DefaultArm.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Torso.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Screens\Load\Level1.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Character_old.xml
-C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1.xml
+C:\Users\Ninte\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\DefaultLeg.xml

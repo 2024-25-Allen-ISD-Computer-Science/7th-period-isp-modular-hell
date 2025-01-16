@@ -44,15 +44,15 @@ namespace ModularHell
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f);
-
+            AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(60,120), 0.1f);
+            AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f);
             base.Draw(spriteBatch);
             AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
             Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
             spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
-            
-            AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f);
+            AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(35, 120), 0.1f);
+            AttachmentSlots[0].Item1.AttachmentSlots[3].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f);
 
         }
 

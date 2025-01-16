@@ -36,8 +36,8 @@
   <texturePath>Torso</texturePath>
   <lArmXML>DefaultArm</lArmXML>
   <rArmXML>DefaultArm</rArmXML>
-  <lLegXML />
-  <rLegXML />
+  <lLegXML>DefaultLeg</lLegXML>
+  <rLegXML>DefaultLeg</rLegXML>
   <atach>
     <ValueTupleOfEntityAttachmentStringInt32Vector2>
       <Item1>

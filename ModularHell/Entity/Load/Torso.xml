@@ -4,8 +4,8 @@
     <tags>[]</tags>
     <lArmXML>DefaultArm</lArmXML>
     <rArmXML>DefaultArm</rArmXML>
-    <lLegXML></lLegXML>
-    <rLegXML></rLegXML>
+    <lLegXML>DefaultLeg</lLegXML>
+    <rLegXML>DefaultLeg</rLegXML>
     <speedModifier>1.0</speedModifier>
     <damageModifier>1.0</damageModifier>
 </Torso>

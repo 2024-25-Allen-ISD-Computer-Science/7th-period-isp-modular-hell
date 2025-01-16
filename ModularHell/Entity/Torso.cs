@@ -34,6 +34,14 @@ namespace ModularHell
         public override void LoadContent()
         {
             base.LoadContent();
+            _attachmentTexture = Content.Load<Texture2D>(texturePath);
+
+            lLeg = new EntityAttachment();
+            Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
+            lLeg = Host.xmlAttachmentManager.Load("Entity/Load/" + lLegXML + ".xml");
+            lLeg.Host = this.Host;
+            lLeg.LoadContent();
+            lLeg.LoadAnimation("Swing");
             
             lArm = new EntityAttachment();
             Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
@@ -42,6 +50,13 @@ namespace ModularHell
             lArm.Host = this.Host;
             lArm.LoadContent();
             lArm.LoadAnimation("Swing");
+
+            rLeg = new EntityAttachment();
+            Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
+            rLeg = Host.xmlAttachmentManager.Load("Entity/Load/" + rLegXML + ".xml");
+            rLeg.Host = this.Host;
+            rLeg.LoadContent();
+            rLeg.LoadAnimation("Swing");
 
             rArm = new EntityAttachment();
             Host.xmlAttachmentManager.Type = typeof(EntityAttachment);
