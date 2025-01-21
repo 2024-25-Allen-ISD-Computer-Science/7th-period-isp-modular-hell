@@ -23,6 +23,15 @@ namespace ModularHell
 
         public Character(int slots = 0) : base(slots) {}
 
+        [XmlIgnore]
+        public string animation;
+        [XmlIgnore]
+        public string characterState = "Idle";
+        public string previousState;
+
+        public float tick = 0;
+
+
         public override void LoadContent()
         {
             base.LoadContent();
@@ -40,20 +49,35 @@ namespace ModularHell
            //     attachment.Update(gameTime);
             
             doMovement();
+            
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public void LoadAnimation(string name, SpriteBatch spriteBatch)
         {
-            AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f * (_velocity.X / _moveSpeed));
-            AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(60,120), -0.1f * (_velocity.X / _moveSpeed));
+            foreach (var method in typeof(Animator).GetMethods())
+            {
+                //Console.WriteLine(method.Name);
+                if (method.Name == name)
+                {
+                   this.animation = name;
+                   method.Invoke(this, [this, spriteBatch]);
+                }
+            }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            doAnimation(spriteBatch);
+            //AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f * (_velocity.X / _moveSpeed));
+            //AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(60,120), -0.1f * (_velocity.X / _moveSpeed));
            
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, gameTime);
             AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
             Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
             spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
-            AttachmentSlots[0].Item1.AttachmentSlots[3].Item1.Draw(spriteBatch, new Vector2(35, 120), 0.1f * (_velocity.X / _moveSpeed));
-            AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f * (_velocity.X / _moveSpeed));
+            //AttachmentSlots[0].Item1.AttachmentSlots[3].Item1.Draw(spriteBatch, new Vector2(35, 120), 0.1f * (_velocity.X / _moveSpeed));
+            //AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f * (_velocity.X / _moveSpeed));
 
         }
 
@@ -80,7 +104,22 @@ namespace ModularHell
                 this._velocity.Y = _moveSpeed;
                 isMoving = true;
             }
+
+            if (isMoving) {
+                this.previousState = this.characterState;
+                this.characterState = "Walking";
+            }
                 
+        }
+
+        private void doAnimation(SpriteBatch spriteBatch) {
+            if (this.previousState != this.characterState) {
+                if (this.isMoving) {
+                this.LoadAnimation("Walk", spriteBatch);
+            } else {
+                this.LoadAnimation("Idle", spriteBatch);
+            }
+            }
         }
 
     };

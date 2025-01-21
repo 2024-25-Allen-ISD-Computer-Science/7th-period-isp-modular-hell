@@ -59,7 +59,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         _spriteBatch.Begin();
-        ScreenManager.Instance.Draw(_spriteBatch);
+        ScreenManager.Instance.Draw(_spriteBatch, gameTime);
         _spriteBatch.End();
 
         base.Draw(gameTime);

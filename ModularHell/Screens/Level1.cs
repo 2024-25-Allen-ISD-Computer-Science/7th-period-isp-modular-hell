@@ -52,13 +52,13 @@ namespace ModularHell
             Player1.Update(gameTime);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, gameTime);
 
             spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.White);
 
-            Player1.Draw(spriteBatch);
+            Player1.Draw(spriteBatch, gameTime);
         }
 
         public void Generate() {
