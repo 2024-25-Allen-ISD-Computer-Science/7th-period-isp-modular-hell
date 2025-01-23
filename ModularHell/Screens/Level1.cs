@@ -61,11 +61,12 @@ namespace ModularHell
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.Black);
-            spriteBatch.Draw(ballTexture, Camera1.Position, Color.White);
+            spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen , Color.White);
 
-            Vector2 camOffset = Camera1.Position;
-            Player1.Draw(spriteBatch, camOffset);
+            Vector2 camPos = Camera1.Position;
+
+            spriteBatch.Draw(ballTexture, -camPos , Color.Black);
+            Player1.Draw(spriteBatch, camPos);
         }
 
         public void Generate() {

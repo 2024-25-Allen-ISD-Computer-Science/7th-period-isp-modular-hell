@@ -42,25 +42,27 @@ namespace ModularHell
             doMovement();
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 camOffset)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 camPos)
         {
-            (EntityAttachment, int, Vector2) lArm = AttachmentSlots[0].Item1.AttachmentSlots[0];
-            (EntityAttachment, int, Vector2) lLeg = AttachmentSlots[0].Item1.AttachmentSlots[3];
-            (EntityAttachment, int, Vector2) rArm = AttachmentSlots[0].Item1.AttachmentSlots[2];
-            (EntityAttachment, int, Vector2) rLeg = AttachmentSlots[0].Item1.AttachmentSlots[1];
+            (EntityAttachment, int, Vector2) Torso = AttachmentSlots[0];
+            (EntityAttachment, int, Vector2) lArm = Torso.Item1.AttachmentSlots[0];
+            (EntityAttachment, int, Vector2) lLeg = Torso.Item1.AttachmentSlots[2];
+            (EntityAttachment, int, Vector2) rArm = Torso.Item1.AttachmentSlots[1];
+            (EntityAttachment, int, Vector2) rLeg = Torso.Item1.AttachmentSlots[3];
 
-            Vector2 screenPosition = Vector2.Subtract(_position, camOffset);
+            Vector2 screenOffset = Vector2.Subtract(_position, camPos);
+            Vector2 screenPosition = Vector2.Add(ScreenManager.Instance.MiddleScreen,screenOffset);
 
-            lArm.Item1.Draw(spriteBatch, screenPosition, lArm.Item3, 0.1f * (_velocity.X / _moveSpeed));
-            lLeg.Item1.Draw(spriteBatch, screenPosition, lLeg.Item3, -0.1f * (_velocity.X / _moveSpeed));
+            rArm.Item1.Draw(spriteBatch, screenPosition, rArm.Item3, 0.1f * (_velocity.X / _moveSpeed));
+            rLeg.Item1.Draw(spriteBatch, screenPosition, rLeg.Item3, -0.1f * (_velocity.X / _moveSpeed));
            
-            base.Draw(spriteBatch, camOffset);
-            AttachmentSlots[0].Item1.Draw(spriteBatch, screenPosition, new Vector2(45, 80), 0.1f);
+            base.Draw(spriteBatch, camPos);
+            Torso.Item1.Draw(spriteBatch, screenPosition, new Vector2(45, 80), 0.1f);
             Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
-            spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
+            spriteBatch.Draw(_entityTexture, screenPosition, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
-            rLeg.Item1.Draw(spriteBatch, screenPosition, rLeg.Item3, 0.1f * (_velocity.X / _moveSpeed));
-            rArm.Item1.Draw(spriteBatch, screenPosition, rArm.Item3, -0.1f * (_velocity.X / _moveSpeed));
+            lLeg.Item1.Draw(spriteBatch, screenPosition, lLeg.Item3, 0.1f * (_velocity.X / _moveSpeed));
+            lArm.Item1.Draw(spriteBatch, screenPosition, lArm.Item3, -0.1f * (_velocity.X / _moveSpeed));
 
         }
 

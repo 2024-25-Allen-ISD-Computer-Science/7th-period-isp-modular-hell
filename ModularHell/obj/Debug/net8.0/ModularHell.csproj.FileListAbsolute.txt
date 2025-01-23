@@ -134,3 +134,4 @@ C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin
 C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Screens\Load\Level1.xml
 C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Character copy.xml
 C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1.xml
+C:\Users\gummy\Documents\ModularHell\7th-period-isp-modular-hell\ModularHell\bin\Debug\net8.0\Entity\Load\Player1 copy.xml

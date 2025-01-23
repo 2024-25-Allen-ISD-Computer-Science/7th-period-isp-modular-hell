@@ -44,7 +44,7 @@ namespace ModularHell
 
             spriteBatch.Draw(
                 torsoTexture, // texture
-                Vector2.Subtract(hostScreenPosition, bodyOffset), // position
+                Vector2.Add(hostScreenPosition, bodyOffset), // position
                 torsoRect, // rect
                 Color.White, // color (useful for recolors of the same attachment sprites)
                 rotation, // rotation

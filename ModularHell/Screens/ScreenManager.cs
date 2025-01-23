@@ -17,6 +17,7 @@ namespace ModularHell
         XmlManager<GameScreen> xmlGameScreenManager;
         public ContentManager Content {private set; get;}
         public Vector2 Dimensions {private set; get;}
+        public Vector2 MiddleScreen {private set; get;}
 
         //The following makes this class a "Singleton"
         //Only one of these objects can ever be made and can be called without initialization (like a static class)
@@ -37,6 +38,7 @@ namespace ModularHell
         public ScreenManager()
         {
             Dimensions = new Vector2(640, 640);
+            MiddleScreen = Vector2.Divide(Dimensions,2);
             
             xmlGameScreenManager = new XmlManager<GameScreen>();
             xmlGameScreenManager.Type = typeof(Level1);
