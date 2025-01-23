@@ -42,18 +42,25 @@ namespace ModularHell
             doMovement();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 camOffset)
         {
-            AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f * (_velocity.X / _moveSpeed));
-            AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(60,120), -0.1f * (_velocity.X / _moveSpeed));
+            (EntityAttachment, int, Vector2) lArm = AttachmentSlots[0].Item1.AttachmentSlots[0];
+            (EntityAttachment, int, Vector2) lLeg = AttachmentSlots[0].Item1.AttachmentSlots[3];
+            (EntityAttachment, int, Vector2) rArm = AttachmentSlots[0].Item1.AttachmentSlots[2];
+            (EntityAttachment, int, Vector2) rLeg = AttachmentSlots[0].Item1.AttachmentSlots[1];
+
+            Vector2 screenPosition = Vector2.Subtract(_position, camOffset);
+
+            lArm.Item1.Draw(spriteBatch, screenPosition, lArm.Item3, 0.1f * (_velocity.X / _moveSpeed));
+            lLeg.Item1.Draw(spriteBatch, screenPosition, lLeg.Item3, -0.1f * (_velocity.X / _moveSpeed));
            
-            base.Draw(spriteBatch);
-            AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
+            base.Draw(spriteBatch, camOffset);
+            AttachmentSlots[0].Item1.Draw(spriteBatch, screenPosition, new Vector2(45, 80), 0.1f);
             Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
             spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
-            AttachmentSlots[0].Item1.AttachmentSlots[3].Item1.Draw(spriteBatch, new Vector2(35, 120), 0.1f * (_velocity.X / _moveSpeed));
-            AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f * (_velocity.X / _moveSpeed));
+            rLeg.Item1.Draw(spriteBatch, screenPosition, rLeg.Item3, 0.1f * (_velocity.X / _moveSpeed));
+            rArm.Item1.Draw(spriteBatch, screenPosition, rArm.Item3, -0.1f * (_velocity.X / _moveSpeed));
 
         }
 

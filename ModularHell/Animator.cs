@@ -18,7 +18,7 @@ namespace ModularHell
             
             rotation = (float)Math.Sin(tick);
             
-            return rotation;
+              return rotation;
         }
 
         public static float Idle(float rotation, float tick)

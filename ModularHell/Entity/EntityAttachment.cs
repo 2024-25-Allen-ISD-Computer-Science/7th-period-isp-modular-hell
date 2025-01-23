@@ -72,7 +72,7 @@ namespace ModularHell
         public virtual void UnloadContent()
         {
             if (AttachmentSlots.Length > 0) {
-                for (int slot = 0; slot < AttachmentSlots.Length; slot++) {
+                foreach (var (attachment, tier, position) in AttachmentSlots){
                     AttachmentSlots[0].Item1.UnloadContent();
                 }
             }
@@ -109,7 +109,7 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset, float interval)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 hostScreenPosition, Vector2 bodyOffset, float interval)
         {
             Rectangle attachmentRect = new Rectangle(0,0, _attachmentTexture.Width, _attachmentTexture.Height);
             var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
@@ -122,7 +122,7 @@ namespace ModularHell
 
             spriteBatch.Draw(
                 _attachmentTexture, // texture
-                new Vector2(this.Host._position.X + offset.X, this.Host._position.Y + offset.Y), // position
+                Vector2.Subtract(hostScreenPosition, bodyOffset) , // position
                 attachmentRect, // rect
                 Color.White, // color (useful for recolors of the same attachment sprites)
                 rotation, // rotation

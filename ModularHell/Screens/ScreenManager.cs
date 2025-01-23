@@ -22,6 +22,7 @@ namespace ModularHell
         //Only one of these objects can ever be made and can be called without initialization (like a static class)
         //but can be passed as a parameter in functions (unlike a static class)
         private static ScreenManager instance;
+
         public static ScreenManager Instance
         {
             get 

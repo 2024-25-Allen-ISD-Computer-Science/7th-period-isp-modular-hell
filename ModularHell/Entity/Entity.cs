@@ -62,8 +62,8 @@ namespace ModularHell
         public virtual void UnloadContent()
         {
             if (AttachmentSlots.Length > 0) {
-                for (int slot = 0; slot < AttachmentSlots.Length; slot++) {
-                    AttachmentSlots[0].Item1.UnloadContent();
+                foreach (var (attachment, tier, position) in AttachmentSlots){
+                    attachment.UnloadContent();
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace ModularHell
                 doVelocity(gameTime);
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 camOffset)
         {
         }
 
@@ -104,8 +104,8 @@ namespace ModularHell
             _position += (Vector2.Multiply(_velocity, (float)gameTime.ElapsedGameTime.TotalSeconds));
             //System.Console.WriteLine("character is at " + _position);
             //use world friction once put into xml
-            _velocity.X *= (.5f * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            _velocity.Y *= (.5f * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            _velocity.X *= .5f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _velocity.Y *= .5f * (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (_velocity.X * _velocity.X < 1) 
             {
                 _velocity.X = 0;

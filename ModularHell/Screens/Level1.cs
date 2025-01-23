@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using System.Xml.Serialization;
 
 namespace ModularHell
 {
@@ -16,10 +17,12 @@ namespace ModularHell
 
         private XmlManager<Entity> xmlEntityManager;
         Entity Player1;
-        
+        [XmlIgnore]
+        public Camera Camera1;
 
         public Level1() {
             xmlEntityManager = new XmlManager<Entity>();
+            Camera1 = new Camera(new Vector2(0,0), 1);
         }
         public override void LoadContent()
         {
@@ -30,6 +33,7 @@ namespace ModularHell
             xmlEntityManager.Type = typeof(Character);
             Player1 = xmlEntityManager.Load($"Entity/Load/Player1.xml");
             Player1.LoadContent();
+            Camera1.Position = Player1._position;
         }
 
         public override void UnloadContent()
@@ -48,17 +52,20 @@ namespace ModularHell
                 xmlEntityManager.Save($"Entity/Load/Player1.xml", Player1);
             }
             
-        
             Player1.Update(gameTime);
+            Camera1.Position = Player1._position;
+            Camera1.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.White);
+            spriteBatch.Draw(ballTexture, new Vector2(0,0), Color.Black);
+            spriteBatch.Draw(ballTexture, Camera1.Position, Color.White);
 
-            Player1.Draw(spriteBatch);
+            Vector2 camOffset = Camera1.Position;
+            Player1.Draw(spriteBatch, camOffset);
         }
 
         public void Generate() {

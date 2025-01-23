@@ -14,8 +14,8 @@
             </Item1>
             <Item2>0</Item2>
             <Item3>
-              <X>0</X>
-              <Y>0</Y>
+              <X>50</X>
+              <Y>80</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
           <ValueTupleOfEntityAttachmentInt32Vector2>
@@ -28,8 +28,8 @@
             </Item1>
             <Item2>0</Item2>
             <Item3>
-              <X>0</X>
-              <Y>0</Y>
+              <X>20</X>
+              <Y>80</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
           <ValueTupleOfEntityAttachmentInt32Vector2>
@@ -42,8 +42,8 @@
             </Item1>
             <Item2>0</Item2>
             <Item3>
-              <X>0</X>
-              <Y>0</Y>
+              <X>60</X>
+              <Y>120</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
           <ValueTupleOfEntityAttachmentInt32Vector2>
@@ -56,8 +56,8 @@
             </Item1>
             <Item2>0</Item2>
             <Item3>
-              <X>0</X>
-              <Y>0</Y>
+              <X>35</X>
+              <Y>120</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
         </AttachmentSlots>
