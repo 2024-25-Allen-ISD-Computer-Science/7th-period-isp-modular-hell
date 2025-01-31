@@ -29,7 +29,8 @@ namespace ModularHell
         public string characterState = "Idle";
         public string previousState;
 
-        public float tick = 0;
+        public int frame = 0;
+        public int frameRate = 1;
 
 
         public override void LoadContent()
@@ -52,7 +53,7 @@ namespace ModularHell
             
         }
 
-        public void LoadAnimation(string name, SpriteBatch spriteBatch)
+        public void LoadAnimation(string name, SpriteBatch spriteBatch, GameTime gameTime)
         {
             foreach (var method in typeof(Animator).GetMethods())
             {
@@ -60,19 +61,19 @@ namespace ModularHell
                 if (method.Name == name)
                 {
                    this.animation = name;
-                   method.Invoke(this, [this, spriteBatch]);
+                   method.Invoke(this, [this, spriteBatch, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
                 }
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            doAnimation(spriteBatch);
+            doAnimation(spriteBatch, gameTime);
             //AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f * (_velocity.X / _moveSpeed));
             //AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(60,120), -0.1f * (_velocity.X / _moveSpeed));
            
             base.Draw(spriteBatch, gameTime);
-            AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
+            //AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
             Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
             spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
@@ -106,19 +107,34 @@ namespace ModularHell
             }
 
             if (isMoving) {
-                this.previousState = this.characterState;
-                this.characterState = "Walking";
+                if (this.characterState == "Idle") {
+                    this.previousState = this.characterState;
+                    this.characterState = "Walking";
+                } else {
+                    this.characterState = "Walking";
+                }
+            } else {
+                if (this.characterState == "Walking") {
+                    this.previousState = this.characterState;
+                    this.characterState = "Idle";
+                } else {
+                    this.characterState = "Idle";
+                }
             }
                 
         }
 
-        private void doAnimation(SpriteBatch spriteBatch) {
-            if (this.previousState != this.characterState) {
-                if (this.isMoving) {
-                this.LoadAnimation("Walk", spriteBatch);
-            } else {
-                this.LoadAnimation("Idle", spriteBatch);
+        private void doAnimation(SpriteBatch spriteBatch, GameTime gameTime) {
+            Console.WriteLine(this.previousState);
+            Console.WriteLine(this.characterState);
+            if (this.characterState != this.previousState) {
+                //this.frame = 0;
             }
+
+            if (this.isMoving) {
+                this.LoadAnimation("Walk", spriteBatch, gameTime);
+            } else {
+                this.LoadAnimation("Idle", spriteBatch, gameTime);
             }
         }
 

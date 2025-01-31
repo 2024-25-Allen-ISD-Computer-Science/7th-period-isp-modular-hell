@@ -109,9 +109,8 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset, float interval)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 offset, float rotation)
         {
-            Console.WriteLine("Y");
             Rectangle attachmentRect = new Rectangle(0,0, _attachmentTexture.Width, _attachmentTexture.Height);
             var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
             
