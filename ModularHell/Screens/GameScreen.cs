@@ -39,7 +39,7 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             
             Vector2 camPos = Camera1.Position;

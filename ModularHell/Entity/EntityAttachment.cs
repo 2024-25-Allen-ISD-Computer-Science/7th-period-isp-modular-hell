@@ -30,7 +30,7 @@ namespace ModularHell
         public float damageModifier = 1.0f;
         protected Texture2D _attachmentTexture;
         public string texturePath;
-        private float rotation;
+        public float rotation;
         private float tick = 0.0f;
         [XmlIgnore]
         public Func<float, float, float> animation;
@@ -62,7 +62,7 @@ namespace ModularHell
                     attachment.Host = this.Host;
                     attachment.LoadContent();
                     //temp
-                    attachment.LoadAnimation("Swing");
+                    
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 hostScreenPosition, Vector2 bodyOffset, float interval)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 hostScreenPosition, Vector2 bodyOffset, float rotation)
         {
             Rectangle attachmentRect = new Rectangle(0,0, _attachmentTexture.Width, _attachmentTexture.Height);
             var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);

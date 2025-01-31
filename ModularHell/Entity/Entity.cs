@@ -73,7 +73,7 @@ namespace ModularHell
                 doVelocity(gameTime);
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 camPos)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 camPos)
         {
         }
 

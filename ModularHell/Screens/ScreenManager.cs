@@ -64,9 +64,9 @@ namespace ModularHell
             currentScreen.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            currentScreen.Draw(spriteBatch);
+            currentScreen.Draw(spriteBatch, gameTime);
 
             if (Debug) {
                 Vector2 mouseScreenPos = InputHandler.MousePosition;

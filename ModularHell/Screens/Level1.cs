@@ -57,14 +57,14 @@ namespace ModularHell
             Camera1.Update();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, gameTime);
 
             spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen, Color.White);
 
             Vector2 camPos = Camera1.Position;
-            Player1.Draw(spriteBatch, camPos);
+            Player1.Draw(spriteBatch, gameTime, camPos);
         }
 
         public void Generate() {
