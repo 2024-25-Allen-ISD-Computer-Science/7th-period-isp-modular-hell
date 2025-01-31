@@ -7,17 +7,20 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ModularHell
 {
     public class ScreenManager 
     {
-
+        bool Debug = true; 
         GameScreen currentScreen;
         XmlManager<GameScreen> xmlGameScreenManager;
         public ContentManager Content {private set; get;}
         public Vector2 Dimensions {private set; get;}
         public Vector2 MiddleScreen {private set; get;}
+
+        public SpriteFont fontArial;
 
         //The following makes this class a "Singleton"
         //Only one of these objects can ever be made and can be called without initialization (like a static class)
@@ -47,6 +50,7 @@ namespace ModularHell
         public void LoadContent(ContentManager passedContent)
         {
             this.Content = new ContentManager(passedContent.ServiceProvider, "Content");
+            fontArial = Content.Load<SpriteFont>("Arial");
             currentScreen.LoadContent();
         }
 
@@ -63,6 +67,14 @@ namespace ModularHell
         public void Draw(SpriteBatch spriteBatch)
         {
             currentScreen.Draw(spriteBatch);
+
+            if (Debug) {
+                Vector2 mouseScreenPos = InputHandler.MousePosition;
+                spriteBatch.DrawString(fontArial, mouseScreenPos.ToString(), Vector2.Zero, Color.LightGreen);
+
+                Vector2 mouseWorldPos = currentScreen.Camera1.ScreenToWorldPosition(mouseScreenPos);
+                spriteBatch.DrawString(fontArial, mouseWorldPos.ToString(), new Vector2(0,20), Color.LightGreen);
+            }
         }
     }
 }

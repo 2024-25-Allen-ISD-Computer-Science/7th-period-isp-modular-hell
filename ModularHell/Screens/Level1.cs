@@ -17,12 +17,12 @@ namespace ModularHell
 
         private XmlManager<Entity> xmlEntityManager;
         Entity Player1;
-        [XmlIgnore]
-        public Camera Camera1;
+
 
         public Level1() {
             xmlEntityManager = new XmlManager<Entity>();
-            Camera1 = new Camera(new Vector2(0,0), 1);
+            Camera1 = new Camera(Vector2.Zero, 1);
+            PlayMap = new Map();
         }
         public override void LoadContent()
         {
@@ -61,11 +61,9 @@ namespace ModularHell
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen , Color.White);
+            spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen, Color.White);
 
             Vector2 camPos = Camera1.Position;
-
-            spriteBatch.Draw(ballTexture, -camPos , Color.Black);
             Player1.Draw(spriteBatch, camPos);
         }
 

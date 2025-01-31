@@ -4,15 +4,19 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Arial.spritefont</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Arm.png</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/ball.png</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/CharacterHead1.png</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/CharacterLeg1.png</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Head.png</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Leg.png</File>
+    <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Maps/windowsBackground.webp</File>
     <File>C:/Users/gummy/Documents/ModularHell/7th-period-isp-modular-hell/ModularHell/Content/Torso.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

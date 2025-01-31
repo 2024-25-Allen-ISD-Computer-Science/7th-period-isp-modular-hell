@@ -15,14 +15,19 @@ namespace ModularHell
         [XmlIgnore]
         public Type Type;
 
+        public Camera Camera1;
+
         public GameScreen()
         {
             Type = this.GetType();
         }
 
+        public Map PlayMap;
+
         public virtual void LoadContent()
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
+            PlayMap.LoadContent();
         }
 
         public virtual void UnloadContent()
@@ -36,6 +41,10 @@ namespace ModularHell
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            
+            Vector2 camPos = Camera1.Position;
+            PlayMap.Draw(spriteBatch, camPos);
+
         }
 
     }

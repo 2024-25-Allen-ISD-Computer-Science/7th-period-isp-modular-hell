@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ModularHell
 {
@@ -22,6 +23,14 @@ namespace ModularHell
         private float _zoom;
         private float _targetZoom;
 
+
+        public Camera() {
+            _zoom = 1;
+            _targetZoom = _zoom;
+            _pos = Vector2.Zero;
+            _targetPos = _pos;
+        }
+
         public Camera(Vector2 pos, float zoom = 1) {
             _zoom = zoom;
             _targetZoom = zoom;
@@ -34,5 +43,14 @@ namespace ModularHell
             }
 
         }
+
+        public Vector2 ScreenToWorldPosition(Vector2 screenCoords) {
+            return Vector2.Add(screenCoords, _pos);
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            
+        }
+
     }
 }

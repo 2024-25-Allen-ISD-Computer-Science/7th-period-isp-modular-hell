@@ -74,5 +74,9 @@
     </ValueTupleOfEntityAttachmentInt32Vector2>
   </AttachmentSlots>
   <texturePath>Head</texturePath>
+  <_position>
+    <X>-430.08453</X>
+    <Y>-180.02824</Y>
+  </_position>
   <Name>Character</Name>
 </Character>

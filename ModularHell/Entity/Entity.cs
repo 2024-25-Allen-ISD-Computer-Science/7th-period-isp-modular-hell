@@ -23,7 +23,6 @@ namespace ModularHell
 
         [XmlIgnore]
         public Vector2 _velocity;
-        [XmlIgnore]
         public Vector2 _position;
         protected static ContentManager Content;
 

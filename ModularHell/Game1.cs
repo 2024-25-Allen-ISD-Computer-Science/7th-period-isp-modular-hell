@@ -44,13 +44,14 @@ public class Game1 : Game
     }
     protected override void Update(GameTime gameTime)
     {
+        InputHandler.Update();
         //exits game
         if (InputHandler.HoldingKey(Keys.Escape))
             this.Exit();
 
-
         ScreenManager.Instance.Update(gameTime);
 
+        
         base.Update(gameTime);
     }
 
@@ -60,9 +61,8 @@ public class Game1 : Game
         
         _spriteBatch.Begin();
         ScreenManager.Instance.Draw(_spriteBatch);
-        _spriteBatch.End();
-
         base.Draw(gameTime);
+        _spriteBatch.End();
     }
 
 }
