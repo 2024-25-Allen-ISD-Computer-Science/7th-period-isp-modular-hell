@@ -74,6 +74,7 @@ namespace ModularHell
 
                 Vector2 mouseWorldPos = currentScreen.Camera1.ScreenToWorldPosition(mouseScreenPos);
                 spriteBatch.DrawString(fontArial, mouseWorldPos.ToString(), new Vector2(0,20), Color.LightGreen);
+                spriteBatch.DrawString(fontArial, "[K] to Save Character Data to XML", new Vector2(0,40), Color.LightGreen);
             }
         }
     }
