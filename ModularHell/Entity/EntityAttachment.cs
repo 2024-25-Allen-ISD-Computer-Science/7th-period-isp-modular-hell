@@ -31,7 +31,8 @@ namespace ModularHell
         protected Texture2D _attachmentTexture;
         public string texturePath;
         public float rotation;
-        private float tick = 0.0f;
+        public Vector2 offset;
+
         [XmlIgnore]
         public Func<float, float, float> animation;
 

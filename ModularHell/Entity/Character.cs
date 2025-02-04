@@ -111,6 +111,7 @@ namespace ModularHell
                     this.previousState = this.characterState;
                     this.characterState = "Walking";
                 } else {
+                    this.previousState = "Walking";
                     this.characterState = "Walking";
                 }
             } else {
@@ -118,6 +119,7 @@ namespace ModularHell
                     this.previousState = this.characterState;
                     this.characterState = "Idle";
                 } else {
+                    this.previousState = "Idle";
                     this.characterState = "Idle";
                 }
             }
@@ -125,10 +127,9 @@ namespace ModularHell
         }
 
         private void doAnimation(SpriteBatch spriteBatch, GameTime gameTime) {
-            Console.WriteLine(this.previousState);
-            Console.WriteLine(this.characterState);
+            
             if (this.characterState != this.previousState) {
-                //this.frame = 0;
+                this.frame = 0;
             }
 
             if (this.isMoving) {
