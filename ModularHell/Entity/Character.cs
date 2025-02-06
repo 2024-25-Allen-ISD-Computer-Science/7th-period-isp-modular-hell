@@ -53,7 +53,7 @@ namespace ModularHell
             
         }
 
-        public void LoadAnimation(string name, SpriteBatch spriteBatch, GameTime gameTime)
+        public void LoadAnimation(string name, SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime)
         {
             foreach (var method in typeof(Animator).GetMethods())
             {
@@ -61,34 +61,29 @@ namespace ModularHell
                 if (method.Name == name)
                 {
                    this.animation = name;
-                   method.Invoke(this, [this, spriteBatch, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
+                   method.Invoke(this, [this, spriteBatch, screenPosition, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
                 }
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 camPos)
         {
-            (EntityAttachment, int, Vector2) Torso = doAnimation(spriteBatch, gameTime);
-            //AttachmentSlots[0];
-            (EntityAttachment, int, Vector2) lArm = Torso.Item1.AttachmentSlots[0];
-            (EntityAttachment, int, Vector2) lLeg = Torso.Item1.AttachmentSlots[2];
-            (EntityAttachment, int, Vector2) rArm = Torso.Item1.AttachmentSlots[1];
-            //(EntityAttachment, int, Vector2) rLeg = Torso.Item1.AttachmentSlots[3];
+            Vector2 camPlayerOffset = Vector2.Subtract(camPos, _position);
+            Vector2 screenPosition = Vector2.Add(ScreenManager.Instance.MiddleScreen,camPlayerOffset);
+            Rectangle headRect = new Rectangle(0, 0, 1000, 1000);
+            screenPosition.X -= headRect.Width / 10 / 2;
+            screenPosition.Y -= headRect.Height / 10;
 
-            Vector2 screenOffset = Vector2.Subtract(_position, camPos);
-            Vector2 screenPosition = Vector2.Add(ScreenManager.Instance.MiddleScreen,screenOffset);
-
-            rArm.Item1.Draw(spriteBatch, screenPosition, rArm.Item3, 0.1f * (_velocity.X / _moveSpeed));
-            rLeg.Item1.Draw(spriteBatch, screenPosition, rLeg.Item3, -0.1f * (_velocity.X / _moveSpeed));
+            doAnimation(spriteBatch, screenPosition, gameTime);
+            //AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f * (_velocity.X / _moveSpeed));
+            //AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(60,120), -0.1f * (_velocity.X / _moveSpeed));
            
             base.Draw(spriteBatch, gameTime, camPos);
-            //Torso.Item1.Draw(spriteBatch, screenPosition, new Vector2(45, 80), 0.1f);
-            Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
+            //AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
+
             spriteBatch.Draw(_entityTexture, screenPosition, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
-
-            //lLeg.Item1.Draw(spriteBatch, screenPosition, lLeg.Item3, 0.1f * (_velocity.X / _moveSpeed));
-            //lArm.Item1.Draw(spriteBatch, screenPosition, lArm.Item3, -0.1f * (_velocity.X / _moveSpeed));
-
+            //AttachmentSlots[0].Item1.AttachmentSlots[3].Item1.Draw(spriteBatch, new Vector2(35, 120), 0.1f * (_velocity.X / _moveSpeed));
+            //AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f * (_velocity.X / _moveSpeed));
         }
 
         private void doMovement() 
@@ -133,7 +128,7 @@ namespace ModularHell
                 
         }
 
-        private void doAnimation(SpriteBatch spriteBatch, GameTime gameTime) {
+        private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
             Console.WriteLine(this.previousState);
             Console.WriteLine(this.characterState);
             if (this.characterState != this.previousState) {
@@ -141,9 +136,9 @@ namespace ModularHell
             }
 
             if (this.isMoving) {
-                this.LoadAnimation("Walk", spriteBatch, gameTime);
+                this.LoadAnimation("Walk", spriteBatch, screenPosition, gameTime);
             } else {
-                this.LoadAnimation("Idle", spriteBatch, gameTime);
+                this.LoadAnimation("Idle", spriteBatch, screenPosition, gameTime);
             }
         }
 

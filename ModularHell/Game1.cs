@@ -61,7 +61,6 @@ public class Game1 : Game
         
         _spriteBatch.Begin();
         ScreenManager.Instance.Draw(_spriteBatch, gameTime);
-        _spriteBatch.End();
 
         base.Draw(gameTime);
         _spriteBatch.End();

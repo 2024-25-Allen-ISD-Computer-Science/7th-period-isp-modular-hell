@@ -35,7 +35,7 @@ namespace ModularHell
         {
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 hostScreenPosition, Vector2 bodyOffset, float interval)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 offset, float interval)
         {
             Texture2D torsoTexture = Content.Load<Texture2D>("Torso");
             Rectangle torsoRect = new Rectangle(0,0, 1000, 1000);
@@ -44,7 +44,7 @@ namespace ModularHell
 
             spriteBatch.Draw(
                 torsoTexture, // texture
-                Vector2.Add(hostScreenPosition, bodyOffset), // position
+                Vector2.Add(Vector2.Zero, offset), // position
                 torsoRect, // rect
                 Color.White, // color (useful for recolors of the same attachment sprites)
                 rotation, // rotation

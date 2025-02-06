@@ -22,65 +22,47 @@ namespace ModularHell
               return rotation;
         }
 
-        public static void Idle(ref Character entity, SpriteBatch spriteBatch, float ticks)
+        public static void Idle(ref Character entity, SpriteBatch spriteBatch, Vector2 screenPosition, float ticks)
         {
 
             // each item in list is a frame, contains information for each body part (rotation and offset)
-            var keyframes = new List<Dictionary<string, Dictionary<string, object>>>()
+            var keyframes = new List<List<Dictionary<string, object>>>()
             {
                 new() {
-                    {"torso", new(){
-                            {"Rotation", 2.0f},
-                            {"Offset", new Vector2(45f,80f)}
-                        }
-                    },
-                    {"rArm", new(){
-                            {"Rotation", -1.0f},
-                            {"Offset", new Vector2(20f,80f)}
-                        }
-                    },
-                    {"lArm", new(){
+                    new() {
                             {"Rotation", 1.0f},
                             {"Offset", new Vector2(50f,80f)}
-                        }
                     },
-                    {"rLeg", new(){
-                            {"Rotation", 1.0f},
-                            {"Offset", new Vector2(35f,120f)}
-                        }
+                    new() {
+                            {"Rotation", -1.0f},
+                            {"Offset", new Vector2(20f,80f)}
                     },
-                    {"lLeg", new(){
+                     new() {
                             {"Rotation", -1.0f},
                             {"Offset", new Vector2(60f,120f)}
-                        }
                     },
+                    new() {
+                            {"Rotation", 1.0f},
+                            {"Offset", new Vector2(35f,120f)}
+                    }
                 },
                 new() {
-                    {"torso", new(){
-                            {"Rotation", 2.0f},
-                            {"Offset", new Vector2(45f,80f)}
-                        }
-                    },
-                    {"rArm", new(){
-                            {"Rotation", 1.0f},
-                            {"Offset", new Vector2(20f,80f)}
-                        }
-                    },
-                    {"lArm", new(){
+                    new() {
                             {"Rotation", -1.0f},
                             {"Offset", new Vector2(50f,80f)}
-                        }
                     },
-                    {"rLeg", new(){
-                            {"Rotation", -1.0f},
-                            {"Offset", new Vector2(35f,120f)}
-                        }
+                    new() {
+                            {"Rotation", 1.0f},
+                            {"Offset", new Vector2(20f,80f)}
                     },
-                    {"lLeg", new(){
+                    new() {
                             {"Rotation", 1.0f},
                             {"Offset", new Vector2(60f,120f)}
-                        }
                     },
+                    new() {
+                            {"Rotation", -1.0f},
+                            {"Offset", new Vector2(35f,120f)}
+                    }
                 }
             };
 
@@ -89,13 +71,11 @@ namespace ModularHell
                 100
             };
 
-            var attachments = entity.AttachmentSlots;
-            var torso = attachments[0].Item1;
-            var rArm = attachments[0].Item1.AttachmentSlots[1].Item1;
-            var lArm = attachments[0].Item1.AttachmentSlots[0].Item1;
-            var rLeg = attachments[0].Item1.AttachmentSlots[3].Item1;
-            var lLeg = attachments[0].Item1.AttachmentSlots[2].Item1;
 
+            var torso = entity.AttachmentSlots[0];
+            var attachments = torso.Item1.AttachmentSlots;
+
+            var drawOrder = new List<int>() {0,2,3,1};
             if (entity.isMoving) {
                 if (entity.frame >= keyframeTimes.Last()) {
                     entity.frameRate = -1;
@@ -106,109 +86,81 @@ namespace ModularHell
                 entity.frame += entity.frameRate;
             }
 
-            for (int i = 1; i < keyframeTimes.Count; i++) {
-                if (entity.frame <= keyframeTimes[i]) {
-                    var distance = ((float)entity.frame-(float)keyframeTimes[i-1])/((float)keyframeTimes[i]-(float)keyframeTimes[i-1]);
+            for (int i = 0; i < keyframeTimes.Count - 1; i++) {
+                if (entity.frame <= keyframeTimes[i+1]) {
+                    var distance = ((float)entity.frame-(float)keyframeTimes[i])/((float)keyframeTimes[i+1]-(float)keyframeTimes[i]);
                     var frame = keyframes[keyframeTimes[0]];
 
-                    var lArmRotationLerp = float.Lerp((float)keyframes[i-1]["lArm"]["Rotation"], (float)keyframes[i]["lArm"]["Rotation"], distance);
-                    var lArmOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["lArm"]["Offset"], (Vector2)keyframes[i]["lArm"]["Offset"], distance);
-                    lArm.Draw(spriteBatch, lArmOffsetLerp, lArmRotationLerp);
 
-                    var lLegRotationLerp = float.Lerp((float)keyframes[i-1]["lLeg"]["Rotation"], (float)keyframes[i]["lLeg"]["Rotation"], distance);
-                    var lLegOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["lLeg"]["Offset"], (Vector2)keyframes[i]["lLeg"]["Offset"], distance);
-                    lLeg.Draw(spriteBatch, lLegOffsetLerp, lLegRotationLerp);
+                    for (int part = 0; part < attachments.Length; part++) {
 
-                    var torsoRotationLerp = float.Lerp((float)keyframes[i-1]["torso"]["Rotation"], (float)keyframes[i]["torso"]["Rotation"], distance);
-                    var torsoOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["torso"]["Offset"], (Vector2)keyframes[i]["torso"]["Offset"], distance);
-                    torso.Draw(spriteBatch, torsoOffsetLerp, torsoRotationLerp);    
-
-                    var rLegRotationLerp = float.Lerp((float)keyframes[i-1]["rLeg"]["Rotation"], (float)keyframes[i]["rLeg"]["Rotation"], distance);
-                    var rLegOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["rLeg"]["Offset"], (Vector2)keyframes[i]["rLeg"]["Offset"], distance);
-                    rLeg.Draw(spriteBatch, rLegOffsetLerp, rLegRotationLerp);
-
-                     var rArmRotationLerp = float.Lerp((float)keyframes[i-1]["rArm"]["Rotation"], (float)keyframes[i]["rArm"]["Rotation"], distance);
-                    var rArmOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["rArm"]["Offset"], (Vector2)keyframes[i]["rArm"]["Offset"], distance);
-                    rArm.Draw(spriteBatch, rArmOffsetLerp, rArmRotationLerp);                
+                        var RotationLerp = float.Lerp((float)keyframes[i][drawOrder[part]]["Rotation"], (float)keyframes[i+1][drawOrder[part]]["Rotation"], distance);
+                        var OffsetLerp = Vector2.Lerp((Vector2)keyframes[i][drawOrder[part]]["Offset"], (Vector2)keyframes[i+1][drawOrder[part]]["Offset"], distance);
+                        attachments[drawOrder[part]].Item1.Draw(spriteBatch, Vector2.Add(screenPosition, OffsetLerp), RotationLerp);
+                        if (part == 1) {
+                            torso.Item1.Draw(spriteBatch, Vector2.Add(screenPosition, torso.Item3), 2f);
+                        }
+                    }
 
                     return;
                 }
             }
         }
 
-        public static void Walk(ref Character entity, SpriteBatch spriteBatch, float ticks)
+        public static void Walk(ref Character entity, SpriteBatch spriteBatch, Vector2 screenPosition, float ticks)
         {
 
             // each item in list is a frame, contains information for each body part (rotation and offset)
-            var keyframes = new List<Dictionary<string, Dictionary<string, object>>>()
+            var keyframes = new List<List<Dictionary<string, object>>>()
             {
                 new() {
-                    {"torso", new(){
-                            {"Rotation", 2.0f},
-                            {"Offset", new Vector2(45f,80f)}
-                        }
-                    },
-                    {"rArm", new(){
-                            {"Rotation", -1.0f},
-                            {"Offset", new Vector2(20f,80f)}
-                        }
-                    },
-                    {"lArm", new(){
+                    new() {
                             {"Rotation", 1.0f},
                             {"Offset", new Vector2(50f,80f)}
-                        }
                     },
-                    {"rLeg", new(){
-                            {"Rotation", 1.0f},
-                            {"Offset", new Vector2(35f,120f)}
-                        }
+                    new() {
+                            {"Rotation", -1.0f},
+                            {"Offset", new Vector2(20f,80f)}
                     },
-                    {"lLeg", new(){
+                     new() {
                             {"Rotation", -1.0f},
                             {"Offset", new Vector2(60f,120f)}
-                        }
                     },
+                    new() {
+                            {"Rotation", 1.0f},
+                            {"Offset", new Vector2(35f,120f)}
+                    }
                 },
                 new() {
-                    {"torso", new(){
-                            {"Rotation", 2.0f},
-                            {"Offset", new Vector2(45f,80f)}
-                        }
-                    },
-                    {"rArm", new(){
-                            {"Rotation", 1.0f},
-                            {"Offset", new Vector2(20f,80f)}
-                        }
-                    },
-                    {"lArm", new(){
+                    new() {
                             {"Rotation", -1.0f},
                             {"Offset", new Vector2(50f,80f)}
-                        }
                     },
-                    {"rLeg", new(){
-                            {"Rotation", -1.0f},
-                            {"Offset", new Vector2(35f,120f)}
-                        }
+                    new() {
+                            {"Rotation", 1.0f},
+                            {"Offset", new Vector2(20f,80f)}
                     },
-                    {"lLeg", new(){
+                    new() {
                             {"Rotation", 1.0f},
                             {"Offset", new Vector2(60f,120f)}
-                        }
                     },
+                    new() {
+                            {"Rotation", -1.0f},
+                            {"Offset", new Vector2(35f,120f)}
+                    }
                 }
             };
+            
 
+            var drawOrder = new List<int>() {0,2,3,1};
             var keyframeTimes = new List<int>(){
                 0, //at frame 0, pose character as keyframe[0] prescribes
                 100
             };
 
-            var attachments = entity.AttachmentSlots;
-            var torso = attachments[0].Item1;
-            var rArm = attachments[0].Item1.AttachmentSlots[1].Item1;
-            var lArm = attachments[0].Item1.AttachmentSlots[0].Item1;
-            var rLeg = attachments[0].Item1.AttachmentSlots[3].Item1;
-            var lLeg = attachments[0].Item1.AttachmentSlots[2].Item1;
+            
+            var torso = entity.AttachmentSlots[0];
+            var attachments = torso.Item1.AttachmentSlots; 
 
             if (entity.isMoving) {
                 if (entity.frame >= keyframeTimes.Last()) {
@@ -220,30 +172,21 @@ namespace ModularHell
                 entity.frame += entity.frameRate;
             }
 
-            for (int i = 1; i < keyframeTimes.Count; i++) {
-                if (entity.frame <= keyframeTimes[i]) {
-                    var distance = ((float)entity.frame-(float)keyframeTimes[i-1])/((float)keyframeTimes[i]-(float)keyframeTimes[i-1]);
+            for (int i = 0; i < keyframeTimes.Count - 1; i++) {
+                if (entity.frame <= keyframeTimes[i+1]) {
+                    var distance = ((float)entity.frame-(float)keyframeTimes[i])/((float)keyframeTimes[i+1]-(float)keyframeTimes[i]);
                     var frame = keyframes[keyframeTimes[0]];
 
-                    var lArmRotationLerp = float.Lerp((float)keyframes[i-1]["lArm"]["Rotation"], (float)keyframes[i]["lArm"]["Rotation"], distance);
-                    var lArmOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["lArm"]["Offset"], (Vector2)keyframes[i]["lArm"]["Offset"], distance);
-                    lArm.Draw(spriteBatch, lArmOffsetLerp, lArmRotationLerp);
 
-                    var lLegRotationLerp = float.Lerp((float)keyframes[i-1]["lLeg"]["Rotation"], (float)keyframes[i]["lLeg"]["Rotation"], distance);
-                    var lLegOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["lLeg"]["Offset"], (Vector2)keyframes[i]["lLeg"]["Offset"], distance);
-                    lLeg.Draw(spriteBatch, lLegOffsetLerp, lLegRotationLerp);
+                    for (int part = 0; part < attachments.Length; part++) {
 
-                    var torsoRotationLerp = float.Lerp((float)keyframes[i-1]["torso"]["Rotation"], (float)keyframes[i]["torso"]["Rotation"], distance);
-                    var torsoOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["torso"]["Offset"], (Vector2)keyframes[i]["torso"]["Offset"], distance);
-                    torso.Draw(spriteBatch, torsoOffsetLerp, torsoRotationLerp);    
-
-                    var rLegRotationLerp = float.Lerp((float)keyframes[i-1]["rLeg"]["Rotation"], (float)keyframes[i]["rLeg"]["Rotation"], distance);
-                    var rLegOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["rLeg"]["Offset"], (Vector2)keyframes[i]["rLeg"]["Offset"], distance);
-                    rLeg.Draw(spriteBatch, rLegOffsetLerp, rLegRotationLerp);
-
-                     var rArmRotationLerp = float.Lerp((float)keyframes[i-1]["rArm"]["Rotation"], (float)keyframes[i]["rArm"]["Rotation"], distance);
-                    var rArmOffsetLerp = Vector2.Lerp((Vector2)keyframes[i-1]["rArm"]["Offset"], (Vector2)keyframes[i]["rArm"]["Offset"], distance);
-                    rArm.Draw(spriteBatch, rArmOffsetLerp, rArmRotationLerp);                
+                        var RotationLerp = float.Lerp((float)keyframes[i][drawOrder[part]]["Rotation"], (float)keyframes[i+1][drawOrder[part]]["Rotation"], distance);
+                        var OffsetLerp = Vector2.Lerp((Vector2)keyframes[i][drawOrder[part]]["Offset"], (Vector2)keyframes[i+1][drawOrder[part]]["Offset"], distance);
+                        attachments[drawOrder[part]].Item1.Draw(spriteBatch, Vector2.Add(screenPosition, OffsetLerp), RotationLerp);
+                        if (part == 1) {
+                            torso.Item1.Draw(spriteBatch, Vector2.Add(screenPosition, torso.Item3), 2f);
+                        }
+                    }
 
                     return;
                 }
