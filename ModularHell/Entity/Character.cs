@@ -53,7 +53,7 @@ namespace ModularHell
             
         }
 
-        public void LoadAnimation(string name, SpriteBatch spriteBatch, GameTime gameTime)
+        public void LoadAnimation(string name, SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime)
         {
             foreach (var method in typeof(Animator).GetMethods())
             {
@@ -61,25 +61,29 @@ namespace ModularHell
                 if (method.Name == name)
                 {
                    this.animation = name;
-                   method.Invoke(this, [this, spriteBatch, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
+                   method.Invoke(this, [this, spriteBatch, screenPosition, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
                 }
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 camPos)
         {
-            doAnimation(spriteBatch, gameTime);
+            Vector2 camPlayerOffset = Vector2.Subtract(camPos, _position);
+            Vector2 screenPosition = Vector2.Add(ScreenManager.Instance.MiddleScreen,camPlayerOffset);
+            Rectangle headRect = new Rectangle(0, 0, 1000, 1000);
+            screenPosition.X -= headRect.Width / 10 / 2;
+            screenPosition.Y -= headRect.Height / 10;
+
+            doAnimation(spriteBatch, screenPosition, gameTime);
             //AttachmentSlots[0].Item1.AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(50,80), 0.1f * (_velocity.X / _moveSpeed));
             //AttachmentSlots[0].Item1.AttachmentSlots[2].Item1.Draw(spriteBatch, new Vector2(60,120), -0.1f * (_velocity.X / _moveSpeed));
            
-            base.Draw(spriteBatch, gameTime);
+            base.Draw(spriteBatch, gameTime, camPos);
             //AttachmentSlots[0].Item1.Draw(spriteBatch, new Vector2(45, 80), 0.1f);
-            Rectangle headRect = new Rectangle(10, 10, 1000, 1000);
-            spriteBatch.Draw(_entityTexture, this._position, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
 
+            spriteBatch.Draw(_entityTexture, screenPosition, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
             //AttachmentSlots[0].Item1.AttachmentSlots[3].Item1.Draw(spriteBatch, new Vector2(35, 120), 0.1f * (_velocity.X / _moveSpeed));
             //AttachmentSlots[0].Item1.AttachmentSlots[1].Item1.Draw(spriteBatch, new Vector2(20, 80), -0.1f * (_velocity.X / _moveSpeed));
-
         }
 
         private void doMovement() 
