@@ -20,7 +20,7 @@ namespace ModularHell
             var torso = entity.AttachmentSlots[0];
             var attachments = torso.Item1.AttachmentSlots; 
 
-            if (entity.isMoving) {
+            if (entity.characterState == characterState) {
                 if (entity.frame >= keyframeTimes.Last()) {
                     entity.frameRate = -1;
                 } else if (entity.frame == 0) {
@@ -30,9 +30,12 @@ namespace ModularHell
                 entity.frame += entity.frameRate;
             }
 
+            
+
             for (int i = 0; i < keyframeTimes.Count - 1; i++) {
                 if (entity.frame <= keyframeTimes[i+1]) {
                     var distance = ((float)entity.frame-(float)keyframeTimes[i])/((float)keyframeTimes[i+1]-(float)keyframeTimes[i]);
+                    entity.previousKeyframe = keyframes[i];
                     var frame = keyframes[keyframeTimes[0]];
 
                     for (int LeftPart = 1; LeftPart < attachments.Length; LeftPart += 2) {
@@ -72,19 +75,19 @@ namespace ModularHell
                             {"Offset", new Vector2(45f,75f)}
                     },
                     new() {  //leftArm
-                            {"Rotation", 1.0f},
+                            {"Rotation", -0.7f},
                             {"Offset", new Vector2(50f,80f)}
                     },
                     new() { //rightArm
-                            {"Rotation", -1.0f},
+                            {"Rotation", 0.7f},
                             {"Offset", new Vector2(20f,80f)}
                     },
                      new() { //leftLeg
-                            {"Rotation", -1.0f},
+                            {"Rotation", -0.3f},
                             {"Offset", new Vector2(60f,120f)}
                     },
                     new() { //rightLeg
-                            {"Rotation", 1.0f},
+                            {"Rotation", 0.3f},
                             {"Offset", new Vector2(35f,120f)}
                     }
                 },
@@ -94,19 +97,19 @@ namespace ModularHell
                             {"Offset", new Vector2(45f,75f)}
                     },
                     new() { //leftArm
-                            {"Rotation", -1.0f},
+                            {"Rotation", -0.5f},
                             {"Offset", new Vector2(50f,80f)}
                     },
                     new() { //rightArm
-                            {"Rotation", 1.0f},
+                            {"Rotation", 0.5f},
                             {"Offset", new Vector2(20f,80f)}
                     },
                     new() {//leftLeg
-                            {"Rotation", 1.0f},
+                            {"Rotation", -0.25f},
                             {"Offset", new Vector2(60f,120f)}
                     },
                     new() { //rightLeg
-                            {"Rotation", -1.0f},
+                            {"Rotation", 0.25f},
                             {"Offset", new Vector2(35f,120f)}
                     }
                 }
@@ -140,11 +143,11 @@ namespace ModularHell
                             {"Offset", new Vector2(20f,80f)}
                     },
                     new() { //leftLeg
-                            {"Rotation", -1.0f},
+                            {"Rotation", -0.8f},
                             {"Offset", new Vector2(60f,120f)}
                     },
                     new() {  //rightLeg
-                            {"Rotation", 1.0f},
+                            {"Rotation", 0.8f},
                             {"Offset", new Vector2(35f,120f)}
                     }
                 },
@@ -162,11 +165,11 @@ namespace ModularHell
                             {"Offset", new Vector2(20f,80f)}
                     },
                     new() { //leftLeg
-                            {"Rotation", 1.0f},
+                            {"Rotation", 0.8f},
                             {"Offset", new Vector2(60f,120f)}
                     },
                     new() { //rightLeg
-                            {"Rotation", -1.0f},
+                            {"Rotation", -0.8f},
                             {"Offset", new Vector2(35f,120f)}
                     }
                 }

@@ -238,19 +238,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gummy\\.nuget\\packages\\": {}
+    "C:\\Users\\Ninte\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gummy\\Documents\\ModularHell\\7th-period-isp-modular-hell\\ModularHell\\ModularHell.csproj",
+      "projectUniqueName": "C:\\Users\\Ninte\\Documents\\ModularHell\\7th-period-isp-modular-hell\\ModularHell\\ModularHell.csproj",
       "projectName": "ModularHell",
-      "projectPath": "C:\\Users\\gummy\\Documents\\ModularHell\\7th-period-isp-modular-hell\\ModularHell\\ModularHell.csproj",
-      "packagesPath": "C:\\Users\\gummy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gummy\\Documents\\ModularHell\\7th-period-isp-modular-hell\\ModularHell\\obj\\",
+      "projectPath": "C:\\Users\\Ninte\\Documents\\ModularHell\\7th-period-isp-modular-hell\\ModularHell\\ModularHell.csproj",
+      "packagesPath": "C:\\Users\\Ninte\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ninte\\Documents\\ModularHell\\7th-period-isp-modular-hell\\ModularHell\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gummy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Ninte\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

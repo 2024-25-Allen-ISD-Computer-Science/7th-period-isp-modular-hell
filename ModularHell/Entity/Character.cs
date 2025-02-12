@@ -32,6 +32,9 @@ namespace ModularHell
         public int frame = 0;
         public int frameRate = 1;
 
+        [XmlIgnore]
+        public List<Dictionary<string, object>> previousKeyframe = null;
+
 
         public override void LoadContent()
         {
@@ -89,6 +92,7 @@ namespace ModularHell
         private void doMovement() 
         {
             this.isMoving = false;
+            //this.frameRate = (int)(1 * Math.Sqrt(this._velocity.X * this._velocity.X + this._velocity.Y * this._velocity.Y));
 
             if (InputHandler.HoldingKey(Keys.Right)) {
                 this._velocity.X = _moveSpeed;  
@@ -111,28 +115,18 @@ namespace ModularHell
             }
 
             if (isMoving) {
-                if (this.characterState == "Idle") {
-                    this.previousState = this.characterState;
-                    this.characterState = "Walking";
-                } else {
-                    this.characterState = "Walking";
-                }
+                this.previousState = this.characterState;
+                this.characterState = "Walking";
             } else {
-                if (this.characterState == "Walking") {
-                    this.previousState = this.characterState;
-                    this.characterState = "Idle";
-                } else {
-                    this.characterState = "Idle";
-                }
+                this.previousState = this.characterState;
+                this.characterState = "Idle";
             }
                 
         }
 
         private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
-            Console.WriteLine(this.previousState);
-            Console.WriteLine(this.characterState);
             if (this.characterState != this.previousState) {
-                //this.frame = 0;
+                this.frame = 0;
             }
 
             if (this.isMoving) {
