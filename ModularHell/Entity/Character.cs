@@ -30,10 +30,11 @@ namespace ModularHell
         public string previousState;
 
         public int frame = 0;
+        public int transitionFrame = 50;
         public int frameRate = 1;
 
         [XmlIgnore]
-        public List<Dictionary<string, object>> previousKeyframe = null;
+        public Keyframe previousKeyframe = null;
 
 
         public override void LoadContent()
@@ -127,6 +128,7 @@ namespace ModularHell
         private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
             if (this.characterState != this.previousState) {
                 this.frame = 0;
+                this.transitionFrame = 0;
             }
 
             if (this.isMoving) {
