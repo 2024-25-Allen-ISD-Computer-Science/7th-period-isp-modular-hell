@@ -27,10 +27,10 @@ namespace ModularHell
             collisionMap = new int[,]
             {
                 { 1, 1, 1, 1, 1 },
-                { 1, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0 }
+                { 1, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 1 },
+                { 1, 1, 1, 1, 1 }
             };
         }
 
@@ -45,14 +45,14 @@ namespace ModularHell
         
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 camPos)
         {       
-            spriteBatch.Draw(mapTexture, -camPos, Color.White);
+            spriteBatch.Draw(mapTexture, -camPos + ScreenManager.Instance.MiddleScreen, Color.White);
 
             for (int row = 0; row < collisionMap.GetLength(1); row ++) {
                 for (int column = 0; column < collisionMap.GetLength(0); column ++)
                 {
                     if (collisionMap[row,column] == 1) {
-                        float y = (100 * row) - camPos.Y;
-                        float x = (100 * column) - camPos.X;
+                        float y = (100 * row) - camPos.Y + ScreenManager.Instance.MiddleScreen.Y;
+                        float x = (100 * column) - camPos.X + ScreenManager.Instance.MiddleScreen.Y;
  
 
                         Rectangle rect = new Rectangle((int)x,(int)y,100,100);

@@ -20,15 +20,15 @@ namespace ModularHell
             var torso = entity.AttachmentSlots[0];
             var attachments = torso.Item1.AttachmentSlots; 
 
-            if (entity.isMoving) {
-                if (entity.frame >= keyframeTimes.Last()) {
-                    entity.frameRate = -1;
-                } else if (entity.frame == 0) {
-                    entity.frameRate = 1;
-                }
-
-                entity.frame += entity.frameRate;
+            
+            if (entity.frame >= keyframeTimes.Last()) {
+                entity.frameRate = -1;
+            } else if (entity.frame == 0) {
+                entity.frameRate = 1;
             }
+
+            entity.frame += entity.frameRate;
+            
 
             for (int i = 0; i < keyframeTimes.Count - 1; i++) {
                 if (entity.frame <= keyframeTimes[i+1]) {
@@ -68,45 +68,45 @@ namespace ModularHell
             {
                 new() {
                     new() { //torso
-                            {"Rotation", 2.0f},
+                            {"Rotation", .2f},
                             {"Offset", new Vector2(45f,75f)}
                     },
                     new() {  //leftArm
-                            {"Rotation", 1.0f},
+                            {"Rotation", .1f},
                             {"Offset", new Vector2(50f,80f)}
                     },
                     new() { //rightArm
-                            {"Rotation", -1.0f},
+                            {"Rotation", -.1f},
                             {"Offset", new Vector2(20f,80f)}
                     },
                      new() { //leftLeg
-                            {"Rotation", -1.0f},
+                            {"Rotation", -.1f},
                             {"Offset", new Vector2(60f,120f)}
                     },
                     new() { //rightLeg
-                            {"Rotation", 1.0f},
+                            {"Rotation", .1f},
                             {"Offset", new Vector2(35f,120f)}
                     }
                 },
                 new() {
                     new() { //torso
-                            {"Rotation", 2.0f},
-                            {"Offset", new Vector2(45f,75f)}
+                            {"Rotation", .21f},
+                            {"Offset", new Vector2(45f,72f)}
                     },
-                    new() { //leftArm
-                            {"Rotation", -1.0f},
-                            {"Offset", new Vector2(50f,80f)}
+                    new() {  //leftArm
+                            {"Rotation", .1f},
+                            {"Offset", new Vector2(50f,78f)}
                     },
                     new() { //rightArm
-                            {"Rotation", 1.0f},
-                            {"Offset", new Vector2(20f,80f)}
+                            {"Rotation", .1f},
+                            {"Offset", new Vector2(20f,78f)}
                     },
-                    new() {//leftLeg
-                            {"Rotation", 1.0f},
+                     new() { //leftLeg
+                            {"Rotation", -.2f},
                             {"Offset", new Vector2(60f,120f)}
                     },
                     new() { //rightLeg
-                            {"Rotation", -1.0f},
+                            {"Rotation", .2f},
                             {"Offset", new Vector2(35f,120f)}
                     }
                 }
@@ -176,7 +176,7 @@ namespace ModularHell
                 100
             };
 
-            Animate(ref entity, spriteBatch, screenPosition, ticks, "Walking", keyframes, keyframeTimes);
+            Animate(ref entity, spriteBatch, screenPosition, ticks, "Walk", keyframes, keyframeTimes);
         }
     }
 }

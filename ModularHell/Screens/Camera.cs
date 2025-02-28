@@ -45,7 +45,13 @@ namespace ModularHell
         }
 
         public Vector2 ScreenToWorldPosition(Vector2 screenCoords) {
+            Vector2 camOffset = Vector2.Subtract(screenCoords, ScreenManager.Instance.MiddleScreen);
             return Vector2.Add(screenCoords, _pos);
+        }
+
+        public Vector2 WorldToScreenPosition(Vector2 screenCoords) {
+            Vector2 camOffset = Vector2.Subtract(screenCoords, _pos);
+            return Vector2.Add(screenCoords, ScreenManager.Instance.MiddleScreen);
         }
 
         public void Draw(SpriteBatch spriteBatch) {
