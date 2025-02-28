@@ -37,6 +37,7 @@ namespace ModularHell
         public string previousState;
 
         public int frame = 0;
+        public int transitionFrame = 50;
         public int frameRate = 1;
 
         public Entity()
@@ -161,7 +162,8 @@ namespace ModularHell
         private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
             Console.WriteLine(this.characterState);
             if (this.characterState != this.previousState) {
-                //this.frame = 0;
+                this.frame = 0;
+                this.transitionFrame = 0;
             }
 
             if (this.isMoving) {

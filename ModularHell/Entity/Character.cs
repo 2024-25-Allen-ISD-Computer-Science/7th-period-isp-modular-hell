@@ -23,6 +23,9 @@ namespace ModularHell
 
         public Character(int slots = 0) : base(slots) {}
 
+        [XmlIgnore]
+        public Keyframe previousKeyframe = null;
+
 
         public override void LoadContent()
         {
@@ -41,7 +44,6 @@ namespace ModularHell
            //     attachment.Update(gameTime);
             
             doMovement();
-            
         }
 
 
@@ -54,6 +56,7 @@ namespace ModularHell
         {
             this.isMoving = false;
             Vector2 AccelerationVector = Vector2.Zero;
+            //this.frameRate = (int)(1 * Math.Sqrt(this._velocity.X * this._velocity.X + this._velocity.Y * this._velocity.Y));
 
             if (InputHandler.HoldingKey(Keys.Right)) {
                 AccelerationVector.X = 1;
@@ -78,10 +81,13 @@ namespace ModularHell
             }
 
             if (isMoving) {
-                this.characterState = "Walk";
+                this.previousState = this.characterState;
+                this.characterState = "Walking";
             } else {
-                this.characterState = "Idle"; 
+                this.previousState = this.characterState;
+                this.characterState = "Idle";
             }
+                
         }
 
     };

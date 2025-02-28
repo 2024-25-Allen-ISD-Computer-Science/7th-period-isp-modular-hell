@@ -31,7 +31,8 @@ namespace ModularHell
         protected Texture2D _attachmentTexture;
         public Vector2 Dimensions;
         public string texturePath;
-        public float rotation;
+        public float storedRotation;
+        public Vector2 storedOffset;
 
         [XmlIgnore]
         public Func<float, float, float> animation;
@@ -112,11 +113,12 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 screenPosition, float rotation)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 screenPosition, Vector2 offset, float rotation)
         {
             Rectangle attachmentRect = new Rectangle(0,0, _attachmentTexture.Width, _attachmentTexture.Height);
             var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
-            
+            storedOffset = offset;
+            storedRotation = rotation;
 
             spriteBatch.Draw(
                 _attachmentTexture, // texture
