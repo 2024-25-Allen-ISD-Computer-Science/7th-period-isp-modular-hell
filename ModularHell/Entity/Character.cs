@@ -49,7 +49,16 @@ namespace ModularHell
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 camPos)
         {
-            base.Draw(spriteBatch, gameTime, camPos);
+
+            Vector2 camPlayerOffset = Vector2.Subtract(camPos, _position);
+            Vector2 screenPosition = Vector2.Add(ScreenManager.Instance.MiddleScreen,camPlayerOffset);
+            Rectangle headRect = new Rectangle(0, 0, _entityTexture.Width, _entityTexture.Height);
+            screenPosition.X -= headRect.Width / 10 / 2;
+            screenPosition.Y -= headRect.Height / 10;
+
+            doAnimation(spriteBatch, screenPosition, gameTime);
+
+            spriteBatch.Draw(_entityTexture, screenPosition, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
         }
 
         private void doMovement() 

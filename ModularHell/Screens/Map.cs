@@ -26,11 +26,17 @@ namespace ModularHell
 
             collisionMap = new int[,]
             {
-                { 1, 1, 1, 1, 1 },
-                { 1, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 1 },
-                { 1, 1, 1, 1, 1 }
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             };
         }
 
@@ -47,8 +53,8 @@ namespace ModularHell
         {       
             spriteBatch.Draw(mapTexture, -camPos + ScreenManager.Instance.MiddleScreen, Color.White);
 
-            for (int row = 0; row < collisionMap.GetLength(1); row ++) {
-                for (int column = 0; column < collisionMap.GetLength(0); column ++)
+            for (int row = 0; row < collisionMap.GetLength(0); row ++) {
+                for (int column = 0; column < collisionMap.GetLength(1); column ++)
                 {
                     if (collisionMap[row,column] == 1) {
                         float y = (100 * row) - camPos.Y + ScreenManager.Instance.MiddleScreen.Y;

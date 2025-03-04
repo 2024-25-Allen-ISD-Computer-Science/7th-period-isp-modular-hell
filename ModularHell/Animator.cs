@@ -21,10 +21,10 @@ namespace ModularHell
             var attachments = torso.Item1.AttachmentSlots; 
 
             if (entity.transitionFrame < 25) {
-                Console.WriteLine("Transitioning.." + entity.transitionFrame);
+                
                 var goalFrame = keyframes[0];
                 var distance = (float)entity.transitionFrame / 25.0f;
-                Console.WriteLine(distance);
+                
 
                 for (int LeftPart = 1; LeftPart < attachments.Length; LeftPart += 2)
                 {
