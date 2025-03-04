@@ -17,8 +17,8 @@ namespace ModularHell
 
         private XmlManager<Entity> xmlEntityManager;
         Entity Player1;
-
-
+        [XmlIgnore]
+        public SpriteFont fontArial;
         public Level1() {
             xmlEntityManager = new XmlManager<Entity>();
             Camera1 = new Camera(Vector2.Zero, 1);
@@ -34,6 +34,8 @@ namespace ModularHell
             Player1 = xmlEntityManager.Load($"Entity/Load/Player1.xml");
             Player1.LoadContent();
             Camera1.Position = Player1._position;
+
+            fontArial = Content.Load<SpriteFont>("Arial");
         }
 
         public override void UnloadContent()
@@ -52,7 +54,7 @@ namespace ModularHell
                 xmlEntityManager.Save($"Entity/Load/Player1.xml", Player1);
             }
             
-            Player1.Update(gameTime);
+            Player1.Update(gameTime, ref PlayMap.collisionMap);
             Camera1.Position = Player1._position;
             Camera1.Update();
         }
@@ -65,6 +67,10 @@ namespace ModularHell
 
             Vector2 camPos = Camera1.Position;
             Player1.Draw(spriteBatch, gameTime, camPos);
+
+            if (ScreenManager.Instance.Debug) {
+                spriteBatch.DrawString(fontArial, Player1.ToString(), Vector2.Zero, Color.LightGreen);
+            }
         }
 
         public void Generate() {

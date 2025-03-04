@@ -13,7 +13,7 @@ namespace ModularHell
 {
     public class ScreenManager 
     {
-        bool Debug = true; 
+        public bool Debug = true; 
         GameScreen currentScreen;
         XmlManager<GameScreen> xmlGameScreenManager;
         public ContentManager Content {private set; get;}
@@ -69,9 +69,8 @@ namespace ModularHell
             currentScreen.Draw(spriteBatch, gameTime);
 
             if (Debug) {
+                
                 Vector2 mouseScreenPos = InputHandler.MousePosition;
-                spriteBatch.DrawString(fontArial, mouseScreenPos.ToString(), Vector2.Zero, Color.LightGreen);
-
                 Vector2 mouseWorldPos = currentScreen.Camera1.ScreenToWorldPosition(mouseScreenPos);
                 spriteBatch.DrawString(fontArial, mouseWorldPos.ToString(), new Vector2(0,20), Color.LightGreen);
                 spriteBatch.DrawString(fontArial, "[K] to Save Character Data to XML", new Vector2(0,40), Color.LightGreen);

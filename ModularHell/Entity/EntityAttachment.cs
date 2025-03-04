@@ -29,6 +29,7 @@ namespace ModularHell
         public float speedModifier = 1.0f;
         public float damageModifier = 1.0f;
         protected Texture2D _attachmentTexture;
+        public Vector2 Dimensions;
         public string texturePath;
         public float storedRotation;
         public Vector2 storedOffset;
@@ -57,6 +58,8 @@ namespace ModularHell
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
             _attachmentTexture = Content.Load<Texture2D>(texturePath);
+            Dimensions.Y = _attachmentTexture.Height;
+            Dimensions.X = _attachmentTexture.Width;
 
             if (AttachmentSlots.Length > 0) {
                 foreach (var (attachment, tier, position) in AttachmentSlots){
