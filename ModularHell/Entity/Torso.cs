@@ -35,26 +35,9 @@ namespace ModularHell
         {
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 screenPosition, Vector2 offset, float rotation)
+        public override void Draw(ref Camera cam, SpriteBatch spriteBatch, ref Vector2 AnimationOffset, ref float rotation)
         {
-            Texture2D torsoTexture = Content.Load<Texture2D>("Torso");
-            Rectangle torsoRect = new Rectangle(0,0, 1000, 1000);
-            var origin = new Vector2(torsoTexture.Width / 2f, torsoTexture.Height / 4f);
-
-            storedOffset = offset;
-            storedRotation = rotation;
-
-            spriteBatch.Draw(
-                torsoTexture, // texture
-                Vector2.Add(Vector2.Zero, screenPosition), // position
-                torsoRect, // rect
-                Color.White, // color (useful for recolors of the same attachment sprites)
-                rotation, // rotation
-                origin, // origin
-                0.1f, // scale
-                SpriteEffects.None, // sprite effects
-                0.3f // layerdepth
-                );
+            base.Draw(ref cam, spriteBatch, ref AnimationOffset, ref rotation);
         }
 
         public void AddAttachment(string attachment, EntityAttachment slot){

@@ -21,7 +21,7 @@ namespace ModularHell
         public SpriteFont fontArial;
         public Level1() {
             xmlEntityManager = new XmlManager<Entity>();
-            Camera1 = new Camera(Vector2.Zero, 1);
+            Camera1 = new Camera(Vector2.Zero, .1f);
             PlayMap = new Map();
         }
         public override void LoadContent()
@@ -33,7 +33,7 @@ namespace ModularHell
             xmlEntityManager.Type = typeof(Character);
             Player1 = xmlEntityManager.Load($"Entity/Load/Player1.xml");
             Player1.LoadContent();
-            Camera1.Position = Player1._position;
+            Camera1.Position = Player1._position + new Vector2(Player1.Dimensions.X * Camera1.Scale / 2, Player1.Dimensions.Y * Camera1.Scale);
 
             fontArial = Content.Load<SpriteFont>("Arial");
         }
@@ -55,7 +55,7 @@ namespace ModularHell
             }
             
             Player1.Update(gameTime, ref PlayMap.collisionMap);
-            Camera1.Position = Player1._position;
+            Camera1.Position = Player1._position + new Vector2(Player1.Dimensions.X * Camera1.Scale / 2, Player1.Dimensions.Y * Camera1.Scale);
             Camera1.Update();
         }
 
@@ -66,10 +66,10 @@ namespace ModularHell
             spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen, Color.White);
 
             Vector2 camPos = Camera1.Position;
-            Player1.Draw(spriteBatch, gameTime, camPos);
+            Player1.Draw(spriteBatch, gameTime, ref Camera1);
 
             if (ScreenManager.Instance.Debug) {
-                spriteBatch.DrawString(fontArial, Player1.ToString(), Vector2.Zero, Color.LightGreen);
+                spriteBatch.DrawString(fontArial, Player1._position.ToString(), Vector2.Zero, Color.LightGreen);
             }
         }
 

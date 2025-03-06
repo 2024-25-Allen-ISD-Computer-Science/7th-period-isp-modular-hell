@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Runtime.InteropServices.Marshalling;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace ModularHell 
 {
@@ -30,6 +31,12 @@ namespace ModularHell
         public float damageModifier = 1.0f;
         protected Texture2D _attachmentTexture;
         public Vector2 Dimensions;
+        [XmlIgnore]
+        public Rectangle TextureRect;
+        [XmlIgnore]
+        public Rectangle PhysicsRect;
+        public Vector2 Origin;
+        public Vector2 PositionOnHost;
         public string texturePath;
         public float storedRotation;
         public Vector2 storedOffset;
@@ -60,18 +67,18 @@ namespace ModularHell
             _attachmentTexture = Content.Load<Texture2D>(texturePath);
             Dimensions.Y = _attachmentTexture.Height;
             Dimensions.X = _attachmentTexture.Width;
+            Origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
 
             if (AttachmentSlots.Length > 0) {
                 foreach (var (attachment, tier, position) in AttachmentSlots){
                     attachment.Host = this.Host;
+                    attachment.PositionOnHost = position;
                     attachment.LoadContent();
                     //temp
                     
                 }
             }
         }
-
-
 
         public virtual void UnloadContent()
         {
@@ -113,24 +120,14 @@ namespace ModularHell
         {
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 screenPosition, Vector2 offset, float rotation)
+        public virtual void Draw(ref Camera cam, SpriteBatch spriteBatch, ref Vector2 AnimationOffset, ref float rotation)
         {
-            Rectangle attachmentRect = new Rectangle(0,0, _attachmentTexture.Width, _attachmentTexture.Height);
-            var origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
-            storedOffset = offset;
+            Vector2 _position = Host._position + PositionOnHost + AnimationOffset;
+            Vector2 screenPosition = cam.WorldToScreenPosition(_position);
+            TextureRect = new Rectangle((int)screenPosition.X,(int)screenPosition.Y, (int)(Dimensions.X * cam.Scale), (int)(Dimensions.Y * cam.Scale));
+            storedOffset = AnimationOffset;
             storedRotation = rotation;
-
-            spriteBatch.Draw(
-                _attachmentTexture, // texture
-                screenPosition , // position
-                attachmentRect, // rect
-                Color.White, // color (useful for recolors of the same attachment sprites)
-                rotation, // rotation
-                origin, // origin
-                0.1f, // scale
-                SpriteEffects.None, // sprite effects
-                0.5f // layerdepth
-                );
+            spriteBatch.Draw(_attachmentTexture, TextureRect, null, Color.White, rotation, Origin, SpriteEffects.None, 1f);
         }
 
         public virtual void Generate() {

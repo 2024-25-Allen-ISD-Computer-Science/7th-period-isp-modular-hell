@@ -15,7 +15,7 @@ namespace ModularHell
     public class Animator
     {
 
-        private static void Animate(ref Character entity, SpriteBatch spriteBatch, Vector2 screenPosition, float ticks, string characterState, List<Keyframe> keyframes) {
+        private static void Animate(ref Character entity, ref Camera cam, SpriteBatch spriteBatch, float ticks, string characterState, List<Keyframe> keyframes) {
 
             var torso = entity.AttachmentSlots[0];
             var attachments = torso.Item1.AttachmentSlots; 
@@ -42,13 +42,13 @@ namespace ModularHell
                         OffsetLerp = Vector2.Lerp((Vector2)entity.previousKeyframe.LeftArm["Offset"], (Vector2)goalFrame.LeftArm["Offset"], distance);
                     }
 
-                    attachments[LeftPart - 1].Item1.Draw(spriteBatch, Vector2.Add(screenPosition, OffsetLerp), OffsetLerp, RotationLerp);
+                    attachments[LeftPart - 1].Item1.Draw(ref cam, spriteBatch, ref OffsetLerp, ref RotationLerp);
                     // above must be "LeftPart - 1" to account for offset by torso keyframes
                 }
 
                 var TorsoRotationLerp = float.Lerp((float)entity.previousKeyframe.Torso["Rotation"], (float)goalFrame.Torso["Rotation"], distance);
                 var TorsoOffsetLerp = Vector2.Lerp((Vector2)entity.previousKeyframe.Torso["Offset"], (Vector2)goalFrame.Torso["Offset"], distance);
-                torso.Item1.Draw(spriteBatch, Vector2.Add(screenPosition, TorsoOffsetLerp), TorsoOffsetLerp, TorsoRotationLerp);
+                torso.Item1.Draw(ref cam, spriteBatch, ref TorsoOffsetLerp, ref TorsoRotationLerp);
 
                 for (int RightPart = attachments.Length; RightPart > 0; RightPart -= 2)
                 {
@@ -66,7 +66,7 @@ namespace ModularHell
                         OffsetLerp = Vector2.Lerp((Vector2)entity.previousKeyframe.RightArm["Offset"], (Vector2)goalFrame.RightArm["Offset"], distance);
                     }
 
-                    attachments[RightPart - 1].Item1.Draw(spriteBatch, Vector2.Add(screenPosition, OffsetLerp), OffsetLerp, RotationLerp);
+                    attachments[RightPart - 1].Item1.Draw(ref cam, spriteBatch, ref OffsetLerp, ref RotationLerp);
                     // above must be "RightPart - 1" to account for offset by torso keyframes
                 }
 
@@ -122,13 +122,13 @@ namespace ModularHell
                                 OffsetLerp = Vector2.Lerp((Vector2)keyframes[i].LeftArm["Offset"], (Vector2)keyframes[i+1].LeftArm["Offset"], distance);
                             }
 
-                            attachments[LeftPart - 1].Item1.Draw(spriteBatch, Vector2.Add(screenPosition, OffsetLerp), OffsetLerp, RotationLerp);
+                            attachments[LeftPart - 1].Item1.Draw(ref cam, spriteBatch, ref OffsetLerp, ref RotationLerp);
                             // above must be "LeftPart - 1" to account for offset by torso keyframes
                         }
 
                         var TorsoRotationLerp = float.Lerp((float)keyframes[i].Torso["Rotation"], (float)keyframes[i+1].Torso["Rotation"], distance);
                         var TorsoOffsetLerp = Vector2.Lerp((Vector2)keyframes[i].Torso["Offset"], (Vector2)keyframes[i+1].Torso["Offset"], distance);
-                        torso.Item1.Draw(spriteBatch, Vector2.Add(screenPosition, TorsoOffsetLerp), TorsoOffsetLerp, TorsoRotationLerp);
+                        torso.Item1.Draw(ref cam, spriteBatch, ref TorsoOffsetLerp, ref TorsoRotationLerp);
                     
                         for (int RightPart = attachments.Length; RightPart > 0; RightPart -= 2) {
                             var RotationLerp = 0.0f;
@@ -142,7 +142,7 @@ namespace ModularHell
                                 OffsetLerp = Vector2.Lerp((Vector2)keyframes[i].RightArm["Offset"], (Vector2)keyframes[i+1].RightArm["Offset"], distance);
                             }
 
-                            attachments[RightPart - 1].Item1.Draw(spriteBatch, Vector2.Add(screenPosition, OffsetLerp), OffsetLerp, RotationLerp);
+                            attachments[RightPart - 1].Item1.Draw(ref cam, spriteBatch, ref OffsetLerp, ref RotationLerp);
                             // above must be "RightPart - 1" to account for offset by torso keyframes
                         }
 
@@ -154,7 +154,7 @@ namespace ModularHell
             
         }
 
-        public static void Idle(ref Character entity, SpriteBatch spriteBatch, Vector2 screenPosition, float ticks)
+        public static void Idle(ref Character entity, ref Camera cam, SpriteBatch spriteBatch, float ticks)
         {
 
             // each item in list is a frame, contains information for each body part (rotation and offset)
@@ -163,23 +163,23 @@ namespace ModularHell
                 new Keyframe(new() {
                     new() { //torso
                             {"Rotation", 0.0f},
-                            {"Offset", new Vector2(45f,75f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() {  //leftArm
                             {"Rotation", -0.7f},
-                            {"Offset", new Vector2(50f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //rightArm
                             {"Rotation", 0.7f},
-                            {"Offset", new Vector2(20f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                      new() { //leftLeg
                             {"Rotation", -0.3f},
-                            {"Offset", new Vector2(60f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //rightLeg
                             {"Rotation", 0.3f},
-                            {"Offset", new Vector2(35f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     }
                 },
                 //keyframe time
@@ -187,33 +187,33 @@ namespace ModularHell
                 new Keyframe(new() {
                     new() { //torso
                             {"Rotation", 0.0f},
-                            {"Offset", new Vector2(45f,75f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //leftArm
                             {"Rotation", -0.5f},
-                            {"Offset", new Vector2(50f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //rightArm
                             {"Rotation", 0.5f},
-                            {"Offset", new Vector2(20f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() {//leftLeg
                             {"Rotation", -0.25f},
-                            {"Offset", new Vector2(60f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //rightLeg
                             {"Rotation", 0.25f},
-                            {"Offset", new Vector2(35f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     }
                 },
                 //keyframe time
                 100)
             };
 
-            Animate(ref entity, spriteBatch, screenPosition, ticks, "Idle", keyframes);
+            Animate(ref entity, ref cam, spriteBatch, ticks, "Idle", keyframes);
         }
 
-        public static void Walk(ref Character entity, SpriteBatch spriteBatch, Vector2 screenPosition, float ticks)
+        public static void Walk(ref Character entity, ref Camera cam, SpriteBatch spriteBatch, float ticks)
         {
 
             // each item in list is a frame, contains information for each body part (rotation and offset)
@@ -222,23 +222,23 @@ namespace ModularHell
                 new Keyframe(new() {
                     new() { //torso
                             {"Rotation", 0.0f},
-                            {"Offset", new Vector2(45f,75f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() {  //leftArm
                             {"Rotation", 1.0f},
-                            {"Offset", new Vector2(50f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() {  //rightArm
                             {"Rotation", -1.0f},
-                            {"Offset", new Vector2(20f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //leftLeg
                             {"Rotation", -0.8f},
-                            {"Offset", new Vector2(60f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() {  //rightLeg
                             {"Rotation", 0.8f},
-                            {"Offset", new Vector2(35f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     }
                 },
                 //keyframe time
@@ -246,30 +246,30 @@ namespace ModularHell
                 new Keyframe(new() {
                     new() { //torso
                             {"Rotation", 0.0f},
-                            {"Offset", new Vector2(45f,75f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //leftArm
                             {"Rotation", -1.0f},
-                            {"Offset", new Vector2(50f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //rightArm
                             {"Rotation", 1.0f},
-                            {"Offset", new Vector2(20f,80f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //leftLeg
                             {"Rotation", 0.8f},
-                            {"Offset", new Vector2(60f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     },
                     new() { //rightLeg
                             {"Rotation", -0.8f},
-                            {"Offset", new Vector2(35f,120f)}
+                            {"Offset", new Vector2(0f,0f)}
                     }
                 },
                 //keyframe time
                 100)
             };
 
-            Animate(ref entity, spriteBatch, screenPosition, ticks, "Walking", keyframes);
+            Animate(ref entity, ref cam, spriteBatch, ticks, "Walking", keyframes);
         }
     }
 }

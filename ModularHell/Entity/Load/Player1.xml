@@ -14,7 +14,7 @@
             </Item1>
             <Item2>2</Item2>
             <Item3>
-              <X>20</X>
+              <X>50</X>
               <Y>80</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
@@ -28,22 +28,8 @@
             </Item1>
             <Item2>2</Item2>
             <Item3>
-              <X>50</X>
+              <X>20</X>
               <Y>80</Y>
-            </Item3>
-          </ValueTupleOfEntityAttachmentInt32Vector2>
-          <ValueTupleOfEntityAttachmentInt32Vector2>
-            <Item1>
-              <AttachmentSlots />
-              <tags />
-              <speedModifier>0.5</speedModifier>
-              <damageModifier>1</damageModifier>
-              <texturePath>Leg</texturePath>
-            </Item1>
-            <Item2>2</Item2>
-            <Item3>
-              <X>35</X>
-              <Y>120</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
           <ValueTupleOfEntityAttachmentInt32Vector2>
@@ -60,6 +46,20 @@
               <Y>120</Y>
             </Item3>
           </ValueTupleOfEntityAttachmentInt32Vector2>
+          <ValueTupleOfEntityAttachmentInt32Vector2>
+            <Item1>
+              <AttachmentSlots />
+              <tags />
+              <speedModifier>0.5</speedModifier>
+              <damageModifier>1</damageModifier>
+              <texturePath>Leg</texturePath>
+            </Item1>
+            <Item2>2</Item2>
+            <Item3>
+              <X>35</X>
+              <Y>120</Y>
+            </Item3>
+          </ValueTupleOfEntityAttachmentInt32Vector2>
         </AttachmentSlots>
         <tags />
         <speedModifier>1</speedModifier>
@@ -69,7 +69,7 @@
       <Item2>1</Item2>
       <Item3>
         <X>45</X>
-        <Y>80</Y>
+        <Y>75</Y>
       </Item3>
     </ValueTupleOfEntityAttachmentInt32Vector2>
   </AttachmentSlots>

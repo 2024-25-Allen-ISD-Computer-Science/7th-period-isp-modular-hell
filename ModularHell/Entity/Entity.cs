@@ -15,10 +15,16 @@ namespace ModularHell
     public class Entity
     {
         protected Texture2D _entityTexture;
+        public Vector2 Dimensions;
+        
         public (EntityAttachment, int, Vector2)[] AttachmentSlots;
         //      (Attachment, Slot Tier, Position)
         public string texturePath;
         public string Name {get; set;}
+        [XmlIgnore]
+        public Rectangle TextureRect;
+        [XmlIgnore]
+        public Rectangle PhysicsRect;
 
         [XmlIgnore]
         public Vector2 _velocity;
@@ -55,10 +61,14 @@ namespace ModularHell
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
             _entityTexture = Content.Load<Texture2D>(texturePath);
+            Dimensions.X = _entityTexture.Width;
+            Dimensions.Y = _entityTexture.Height;
+            
 
             if (AttachmentSlots.Length > 0) {
                 foreach (var (attachment, tier, position) in AttachmentSlots){
                     attachment.Host = this;
+                    attachment.PositionOnHost = position;
                     attachment.LoadContent();
                     //temp
                     attachment.LoadAnimation("Idle");
@@ -77,20 +87,23 @@ namespace ModularHell
 
         public virtual void Update(GameTime gameTime, ref int[,] collisionMap)
         {
+            PhysicsRect = new Rectangle((int)_position.X,(int)_position.Y, _entityTexture.Width, _entityTexture.Height);
             DoPhysics(gameTime, ref collisionMap);
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 camPos)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, ref Camera cam)
         {
-            Vector2 camPlayerOffset = Vector2.Subtract(camPos, _position);
-            Vector2 screenPosition = Vector2.Add(ScreenManager.Instance.MiddleScreen,camPlayerOffset);
-            Rectangle headRect = new Rectangle(0, 0, _entityTexture.Width, _entityTexture.Height);
-            screenPosition.X -= headRect.Width / 10 / 2;
-            screenPosition.Y -= headRect.Height / 10;
+            Vector2 screenPosition = cam.WorldToScreenPosition(_position);
 
-            doAnimation(spriteBatch, screenPosition, gameTime);
+            TextureRect = new Rectangle((int)screenPosition.X,(int)screenPosition.Y, (int)(Dimensions.X * cam.Scale), (int)(Dimensions.Y * cam.Scale));
 
-            spriteBatch.Draw(_entityTexture, screenPosition, headRect, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0.2f);
+            doAnimation(ref cam, spriteBatch, gameTime);
+            
+            spriteBatch.Draw(_entityTexture, TextureRect, Color.White);
+
+            if (ScreenManager.Instance.Debug) {
+                spriteBatch.Draw(_entityTexture, screenPosition, TextureRect, Color.White, 0f, Vector2.Zero, cam.Scale, SpriteEffects.None, 0.2f);          
+            }
         }
 
         public virtual void Generate() {
@@ -104,7 +117,7 @@ namespace ModularHell
                 AttachmentSlots[1].Item1.Generate();
             }
             */
-            AttachmentSlots[0].Item1 = (Torso)xmlAttachmentManager.Load($"Entity/Load/Torso.xml");
+            AttachmentSlots[0].Item1 = (Torso)xmlAttachmentManager.Load($"Entity/Load/old/Torso.xml");
             AttachmentSlots[0].Item1.Host = this;
             AttachmentSlots[0].Item1.Generate();
 
@@ -125,17 +138,17 @@ namespace ModularHell
                 Console.Write(collisionMap[nextYTile,nextXTile]);
                 if (collisionMap[nextYTile,nextXTile] == 1) {
                     if (nextPosition.X < _position.X) {
-                        StepMove.X = -(_position.X % 100) + 1;
+                        StepMove.X = _position.X;
                         _velocity.X = 0;
                     } else if (nextPosition.X > _position.X){
-                        StepMove.X = 100 - (_position.X % 100) - 1;
+                        StepMove.X = 100 - (_position.X % 100);
                         _velocity.X = 0;
                     }
                     if (nextPosition.Y < _position.Y) {
-                        StepMove.Y = -(_position.Y % 100) + 1;
+                        StepMove.Y = -(_position.Y % 100);
                         _velocity.Y = 0;
-                    } else if (nextPosition.Y < _position.Y){
-                        StepMove.Y = 100 - (_position.Y % 100) - 1;
+                    } else if (nextPosition.Y > _position.Y){
+                        StepMove.Y = 100 - (_position.Y % 100);
                         _velocity.Y = 0;
                     }
                 }
@@ -159,7 +172,7 @@ namespace ModularHell
         }
 
 
-        private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
+        private void doAnimation(ref Camera cam, SpriteBatch spriteBatch, GameTime gameTime) {
             Console.WriteLine(this.characterState);
             if (this.characterState != this.previousState) {
                 this.frame = 0;
@@ -167,12 +180,12 @@ namespace ModularHell
             }
 
             if (this.isMoving) {
-                this.LoadAnimation("Walk", spriteBatch, screenPosition, gameTime);
+                this.LoadAnimation("Walk", ref cam, spriteBatch, gameTime);
             } else {
-                this.LoadAnimation("Idle", spriteBatch, screenPosition, gameTime);
+                this.LoadAnimation("Idle", ref cam, spriteBatch, gameTime);
             }
         }
-        public void LoadAnimation(string name, SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime)
+        public void LoadAnimation(string name, ref Camera cam, SpriteBatch spriteBatch, GameTime gameTime)
         {
             foreach (var method in typeof(Animator).GetMethods())
             {
@@ -180,7 +193,7 @@ namespace ModularHell
                 if (method.Name == name)
                 {
                    this.animation = name;
-                   method.Invoke(this, [this, spriteBatch, screenPosition, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
+                   method.Invoke(this, [this, cam, spriteBatch, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
                 }
             }
         }

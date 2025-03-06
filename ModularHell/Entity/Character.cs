@@ -47,9 +47,10 @@ namespace ModularHell
         }
 
 
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 camPos)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, ref Camera cam)
         {
-            base.Draw(spriteBatch, gameTime, camPos);
+            base.Draw(spriteBatch, gameTime, ref cam);
+            
         }
 
         private void doMovement() 
