@@ -51,7 +51,9 @@ namespace ModularHell
         {
             this.Content = new ContentManager(passedContent.ServiceProvider, "Content");
             fontArial = Content.Load<SpriteFont>("Arial");
+
             currentScreen.LoadContent();
+
         }
 
         public void UnloadContent()

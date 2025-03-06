@@ -40,11 +40,16 @@ namespace ModularHell
             Player1.LoadContent();
             Camera1.Position = Player1._position + new Vector2(Player1.Dimensions.X * Camera1.Scale / 2, Player1.Dimensions.Y * Camera1.Scale);
 
+            xmlEntityManager.Type = typeof(Enemy);
+            Enemy = xmlEntityManager.Load($"Entity/Load/Enemy.xml");
+            Enemy.LoadContent();
+
             fontArial = Content.Load<SpriteFont>("Arial");
         }
 
         public override void UnloadContent()
         {
+            Enemy.UnloadContent();
             Player1.UnloadContent();
             base.UnloadContent();
         }
@@ -79,20 +84,24 @@ namespace ModularHell
             }
         }
 
-        public void Generate() {
+        public override void Generate() {
+
+            /*        
             Player1 = new Character(1);
             Player1.texturePath = "Head";
             Player1.AttachmentSlots = new (EntityAttachment, int, Vector2)[1];
             Player1.Name = "Player1";
             Player1.Generate();
             Player1.LoadContent();
-
-            Enemy = new Entity();
+            */
+            
+            Enemy = new Enemy();
             Enemy.texturePath = "EvilHead";
             Enemy.AttachmentSlots = new (EntityAttachment, int, Vector2)[1];
             Enemy.Name = "EvilEntity";
             Enemy.Generate();
             Enemy.LoadContent();
+            
         }
     }
 }

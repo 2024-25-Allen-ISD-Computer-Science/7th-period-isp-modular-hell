@@ -15,7 +15,7 @@ namespace ModularHell
     public class Animator
     {
 
-        private static void Animate(ref Character entity, ref Camera cam, SpriteBatch spriteBatch, float ticks, string characterState, List<Keyframe> keyframes) {
+        private static void Animate(ref Entity entity, ref Camera cam, SpriteBatch spriteBatch, float ticks, string characterState, List<Keyframe> keyframes) {
 
             var torso = entity.AttachmentSlots[0];
             var attachments = torso.Item1.AttachmentSlots; 
@@ -154,7 +154,7 @@ namespace ModularHell
             
         }
 
-        public static void Idle(ref Character entity, ref Camera cam, SpriteBatch spriteBatch, float ticks)
+        public static void Idle(ref Entity entity, ref Camera cam, SpriteBatch spriteBatch, float ticks)
         {
 
             // each item in list is a frame, contains information for each body part (rotation and offset)
@@ -213,7 +213,7 @@ namespace ModularHell
             Animate(ref entity, ref cam, spriteBatch, ticks, "Idle", keyframes);
         }
 
-        public static void Walk(ref Character entity, ref Camera cam, SpriteBatch spriteBatch, float ticks)
+        public static void Walk(ref Entity entity, ref Camera cam, SpriteBatch spriteBatch, float ticks)
         {
 
             // each item in list is a frame, contains information for each body part (rotation and offset)

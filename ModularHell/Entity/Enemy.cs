@@ -10,7 +10,7 @@ using System.Net.Mail;
 
 namespace ModularHell 
 {
-    public class Character : Entity
+    public class Enemy : Entity
     {
 
         private int _movementAcceleration = 200;
@@ -19,9 +19,9 @@ namespace ModularHell
         public Torso NeckSlot;
         public string NeckSlotXml;
 
-        public Character() : base() {}
+        public Enemy() : base() {}
 
-        public Character(int slots = 0) : base(slots) {}
+        public Enemy(int slots = 0) : base(slots) {}
 
 
 
@@ -55,29 +55,7 @@ namespace ModularHell
         {
             this.isMoving = false;
             Vector2 AccelerationVector = Vector2.Zero;
-            //this.frameRate = (int)(1 * Math.Sqrt(this._velocity.X * this._velocity.X + this._velocity.Y * this._velocity.Y));
-
-            if (InputHandler.HoldingKey(Keys.Right)) {
-                AccelerationVector.X = 1;
-            }
             
-            if (InputHandler.HoldingKey(Keys.Left)) {
-                AccelerationVector.X = -1;
-            }
-                
-            if (InputHandler.HoldingKey(Keys.Up)) {
-                AccelerationVector.Y = -1;
-            }
-                
-            if (InputHandler.HoldingKey(Keys.Down)) {
-                AccelerationVector.Y = 1;
-            }
-
-            if (AccelerationVector != Vector2.Zero) {
-                AccelerationVector.Normalize();
-                this.isMoving = true;
-                _velocity += AccelerationVector * _movementAcceleration;
-            }
 
             if (isMoving) {
                 this.previousState = this.characterState;
@@ -87,6 +65,34 @@ namespace ModularHell
                 this.characterState = "Idle";
             }
                 
+        }
+
+        public override void Generate() {
+            //LoadContent();
+
+            xmlAttachmentManager.Type = typeof(Torso);
+
+            /*
+            if (AttachmentSlots.Length > 0) {
+                AttachmentSlots[1].Item1 = new Torso();
+                AttachmentSlots[1].Item1.Generate();
+            }
+            */
+            AttachmentSlots[0].Item1 = (Torso)xmlAttachmentManager.Load($"Entity/Load/old/Torso.xml");
+            AttachmentSlots[0].Item1.Host = this;
+            AttachmentSlots[0].Item1.Generate();
+            
+            characterState = "Idle";
+
+            frame = 0;
+            transitionFrame = 50;
+            frameRate = 1;
+
+            /*
+            if (!string.IsNullOrEmpty(Name)) {
+                NeckSlotXml = $"{Name}_NeckSlot";
+            }
+            */
         }
 
     };

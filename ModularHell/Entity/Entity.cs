@@ -11,7 +11,7 @@ using System.Data;
 
 namespace ModularHell 
 {
-    [XmlInclude(typeof(Character))]
+    [XmlInclude(typeof(Character)), XmlInclude(typeof(Enemy))]
     public class Entity
     {
         protected Texture2D _entityTexture;
@@ -40,11 +40,13 @@ namespace ModularHell
         public string animation;
         [XmlIgnore]
         public string characterState = "Idle";
-        public string previousState;
+        public string previousState = "Idle";
 
         public int frame = 0;
         public int transitionFrame = 50;
         public int frameRate = 1;
+        [XmlIgnore]
+        public Keyframe previousKeyframe = null;
 
         public Entity()
         {
@@ -97,7 +99,7 @@ namespace ModularHell
 
             TextureRect = new Rectangle((int)screenPosition.X,(int)screenPosition.Y, (int)(Dimensions.X * cam.Scale), (int)(Dimensions.Y * cam.Scale));
 
-            doAnimation(ref cam, spriteBatch, gameTime);
+            this.doAnimation(ref cam, spriteBatch, gameTime);
             
             spriteBatch.Draw(_entityTexture, TextureRect, Color.White);
 
@@ -120,6 +122,12 @@ namespace ModularHell
             AttachmentSlots[0].Item1 = (Torso)xmlAttachmentManager.Load($"Entity/Load/old/Torso.xml");
             AttachmentSlots[0].Item1.Host = this;
             AttachmentSlots[0].Item1.Generate();
+            
+            characterState = "Idle";
+
+            frame = 0;
+            transitionFrame = 50;
+            frameRate = 1;
 
             /*
             if (!string.IsNullOrEmpty(Name)) {
@@ -172,7 +180,7 @@ namespace ModularHell
         }
 
 
-        private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
+        public void doAnimation(ref Camera cam, SpriteBatch spriteBatch, GameTime gameTime) {
             Console.WriteLine(this.characterState);
             if (this.characterState != this.previousState) {
                 this.frame = 0;

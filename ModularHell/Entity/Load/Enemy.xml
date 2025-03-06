@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Enemy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AttachmentSlots>
+    <ValueTupleOfEntityAttachmentInt32Vector2>
+      <Item1 xsi:type="Torso">
+        <AttachmentSlots>
+          <ValueTupleOfEntityAttachmentInt32Vector2>
+            <Item1>
+              <AttachmentSlots />
+              <tags />
+              <speedModifier>0.5</speedModifier>
+              <damageModifier>1</damageModifier>
+              <texturePath>EvilArm</texturePath>
+            </Item1>
+            <Item2>2</Item2>
+            <Item3>
+              <X>50</X>
+              <Y>80</Y>
+            </Item3>
+          </ValueTupleOfEntityAttachmentInt32Vector2>
+          <ValueTupleOfEntityAttachmentInt32Vector2>
+            <Item1>
+              <AttachmentSlots />
+              <tags />
+              <speedModifier>0.5</speedModifier>
+              <damageModifier>1</damageModifier>
+              <texturePath>EvilArm</texturePath>
+            </Item1>
+            <Item2>2</Item2>
+            <Item3>
+              <X>20</X>
+              <Y>80</Y>
+            </Item3>
+          </ValueTupleOfEntityAttachmentInt32Vector2>
+          <ValueTupleOfEntityAttachmentInt32Vector2>
+            <Item1>
+              <AttachmentSlots />
+              <tags />
+              <speedModifier>0.5</speedModifier>
+              <damageModifier>1</damageModifier>
+              <texturePath>EvilLeg</texturePath>
+            </Item1>
+            <Item2>2</Item2>
+            <Item3>
+              <X>60</X>
+              <Y>120</Y>
+            </Item3>
+          </ValueTupleOfEntityAttachmentInt32Vector2>
+          <ValueTupleOfEntityAttachmentInt32Vector2>
+            <Item1>
+              <AttachmentSlots />
+              <tags />
+              <speedModifier>0.5</speedModifier>
+              <damageModifier>1</damageModifier>
+              <texturePath>EvilLeg</texturePath>
+            </Item1>
+            <Item2>2</Item2>
+            <Item3>
+              <X>35</X>
+              <Y>120</Y>
+            </Item3>
+          </ValueTupleOfEntityAttachmentInt32Vector2>
+        </AttachmentSlots>
+        <tags />
+        <speedModifier>1</speedModifier>
+        <damageModifier>1</damageModifier>
+        <texturePath>EvilTorso</texturePath>
+      </Item1>
+      <Item2>1</Item2>
+      <Item3>
+        <X>45</X>
+        <Y>75</Y>
+      </Item3>
+    </ValueTupleOfEntityAttachmentInt32Vector2>
+  </AttachmentSlots>
+  <texturePath>EvilHead</texturePath>
+  <Name>Enemy</Name>
+  <_position>
+    <X>200</X>
+    <Y>200</Y>
+  </_position>
+</Enemy>

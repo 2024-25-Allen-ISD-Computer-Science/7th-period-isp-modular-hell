@@ -46,6 +46,8 @@ namespace ModularHell
             PlayMap.Draw(spriteBatch, camPos);
 
         }
+        public virtual void Generate() {
+        }
 
     }
 }
