@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
+using Microsoft.VisualBasic;
 
 namespace ModularHell
 {
@@ -17,6 +18,10 @@ namespace ModularHell
 
         private XmlManager<Entity> xmlEntityManager;
         Entity Player1;
+
+        //temporary until we need to do more than one enemy
+        Entity Enemy;
+
         [XmlIgnore]
         public SpriteFont fontArial;
         public Level1() {
@@ -67,6 +72,7 @@ namespace ModularHell
 
             Vector2 camPos = Camera1.Position;
             Player1.Draw(spriteBatch, gameTime, ref Camera1);
+            Enemy.Draw(spriteBatch, gameTime, ref Camera1);
 
             if (ScreenManager.Instance.Debug) {
                 spriteBatch.DrawString(fontArial, Player1._position.ToString(), Vector2.Zero, Color.LightGreen);
@@ -80,6 +86,13 @@ namespace ModularHell
             Player1.Name = "Player1";
             Player1.Generate();
             Player1.LoadContent();
+
+            Enemy = new Entity();
+            Enemy.texturePath = "EvilHead";
+            Enemy.AttachmentSlots = new (EntityAttachment, int, Vector2)[1];
+            Enemy.Name = "EvilEntity";
+            Enemy.Generate();
+            Enemy.LoadContent();
         }
     }
 }

@@ -135,7 +135,7 @@ namespace ModularHell
                 int nextXTile = (int)(nextPosition.X / 100);
                 int nextYTile = (int)(nextPosition.Y / 100);
                 
-                Console.Write(collisionMap[nextYTile,nextXTile]);
+            
                 if (collisionMap[nextYTile,nextXTile] == 1) {
                     if (nextPosition.X < _position.X) {
                         StepMove.X = _position.X;
@@ -148,7 +148,7 @@ namespace ModularHell
                         StepMove.Y = -(_position.Y % 100);
                         _velocity.Y = 0;
                     } else if (nextPosition.Y > _position.Y){
-                        StepMove.Y = 100 - (_position.Y % 100);
+                        StepMove.Y = 100 - (_position.Y % 100) - 1;
                         _velocity.Y = 0;
                     }
                 }
@@ -172,7 +172,7 @@ namespace ModularHell
         }
 
 
-        private void doAnimation(ref Camera cam, SpriteBatch spriteBatch, GameTime gameTime) {
+        private void doAnimation(SpriteBatch spriteBatch, Vector2 screenPosition, GameTime gameTime) {
             Console.WriteLine(this.characterState);
             if (this.characterState != this.previousState) {
                 this.frame = 0;
