@@ -20,7 +20,7 @@ namespace ModularHell
             var torso = entity.AttachmentSlots[0];
             var attachments = torso.Item1.AttachmentSlots; 
 
-            if (entity.transitionFrame < 25) {
+            if (entity.transitionFrame < 15) {
                 
                 var goalFrame = keyframes[0];
                 var distance = (float)entity.transitionFrame / 25.0f;
@@ -74,9 +74,9 @@ namespace ModularHell
             } else {
                 if (entity.characterState == characterState) {
                     if (entity.frame >= keyframes.Last().frame) {
-                        entity.frameRate = -1;
+                        entity.frameRate = -2;
                     } else if (entity.frame == 0) {
-                        entity.frameRate = 1;
+                        entity.frameRate = 2;
                 }
 
                 entity.frame += entity.frameRate;
