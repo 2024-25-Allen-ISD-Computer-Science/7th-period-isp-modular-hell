@@ -73,7 +73,7 @@ namespace ModularHell
         {
             base.Draw(spriteBatch, gameTime);
 
-            spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen, Color.White);
+            //spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen, Color.White);
 
             Vector2 camPos = Camera1.Position;
             Player1.Draw(spriteBatch, gameTime, ref Camera1);

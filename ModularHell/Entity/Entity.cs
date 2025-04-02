@@ -44,7 +44,7 @@ namespace ModularHell
 
         public int frame = 0;
         public int transitionFrame = 50;
-        public int frameRate = 1;
+        public int frameRate = 20;
         [XmlIgnore]
         public Keyframe previousKeyframe = null;
 

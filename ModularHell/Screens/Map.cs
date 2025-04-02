@@ -21,22 +21,20 @@ namespace ModularHell
         public string texturePath;
 
         public Map() {
-            mapTexturePath = "Maps/windowsbackground";
+            mapTexturePath = "Maps/cave";
             texturePath = "ball";
 
             collisionMap = new int[,]
             {
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             };
         }
 
@@ -44,7 +42,7 @@ namespace ModularHell
         public virtual void LoadContent() {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
             mapTexture = Content.Load<Texture2D>(mapTexturePath);
-            ballTexture = Content.Load<Texture2D>(texturePath);
+            //ballTexture = Content.Load<Texture2D>(texturePath);
 
 
         }
@@ -61,9 +59,9 @@ namespace ModularHell
                         float x = (100 * column) - camPos.X + ScreenManager.Instance.MiddleScreen.Y;
  
 
-                        Rectangle rect = new Rectangle((int)x,(int)y,100,100);
+                        //Rectangle rect = new Rectangle((int)x,(int)y,100,100);
 
-                        spriteBatch.Draw(ballTexture, rect, Color.White);
+                        //spriteBatch.Draw(ballTexture, rect, Color.White);
                     }
                 }
             }
