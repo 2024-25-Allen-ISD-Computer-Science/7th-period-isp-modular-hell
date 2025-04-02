@@ -25,13 +25,13 @@ namespace ModularHell
 
 
         public Camera() {
-            _scale = .1f;
+            _scale = 1f;
             _targetScale = _scale;
             _pos = Vector2.Zero;
             _targetPos = _pos;
         }
 
-        public Camera(Vector2 pos, float scale = .1f) {
+        public Camera(Vector2 pos, float scale = 1f) {
             _scale = scale;
             _targetScale = scale;
             _pos = pos;

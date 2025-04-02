@@ -65,8 +65,8 @@ namespace ModularHell
         {
             Content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
             _attachmentTexture = Content.Load<Texture2D>(texturePath);
-            Dimensions.Y = _attachmentTexture.Height;
-            Dimensions.X = _attachmentTexture.Width;
+            Dimensions.Y = _attachmentTexture.Height / 10;
+            Dimensions.X = _attachmentTexture.Width / 10;
             Origin = new Vector2(_attachmentTexture.Width / 2f, _attachmentTexture.Height / 7f);
 
             if (AttachmentSlots.Length > 0) {

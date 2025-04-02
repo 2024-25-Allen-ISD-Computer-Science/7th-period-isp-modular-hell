@@ -26,7 +26,7 @@ namespace ModularHell
         public SpriteFont fontArial;
         public Level1() {
             xmlEntityManager = new XmlManager<Entity>();
-            Camera1 = new Camera(Vector2.Zero, .1f);
+            Camera1 = new Camera(Vector2.Zero, 1f);
             PlayMap = new Map();
         }
         public override void LoadContent()
