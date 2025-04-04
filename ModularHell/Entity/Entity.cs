@@ -150,21 +150,24 @@ namespace ModularHell
             //makes 4 corners of hitbox
             Vector2[] Corners = { _position, new Vector2(_position.X + PhysicsRect.Width, _position.Y), new Vector2(_position.X, _position.Y + PhysicsRect.Height), new Vector2(_position.X + PhysicsRect.Width, _position.Y + PhysicsRect.Height) };
             Vector2 middlePoint = new Vector2(PhysicsRect.Center.X, PhysicsRect.Center.Y);
-            Boolean[] cornerInWall = { false, false, false, false };
 
             Vector2 PushBack = Vector2.Zero;
-            System.Console.WriteLine(collisionMap.Length);
-            System.Console.WriteLine(collisionMap.LongLength);
+
+            Vector2 StepMove = Vector2.Multiply(_velocity, (float)gameTime.ElapsedGameTime.TotalSeconds);
+
             for (int corner = 0; corner < Corners.Length; corner++)
             {
-                int nextXTile = (int)(Corners[corner].X / 100);
-                int nextYTile = (int)(Corners[corner].Y / 100);
-                /*
-                if (nextXTile > 0 && nextYTile > 0 && nextYTile < collisionMap.Length && nextXTile < collisionMap.Length)
+                Vector2 CornerNextPos = Corners[corner] + StepMove;
+                int nextXTile = (int)(CornerNextPos.X / 100);
+                int nextYTile = (int)(CornerNextPos.Y / 100);
+                
+                if (nextXTile < 0 || nextYTile < 0 || nextYTile > collisionMap.Length || nextXTile > collisionMap.Length)
                 {
-                    this._position = new Vector2(500, 500);
+                    _velocity = Vector2.Zero;
+                    this._position = new Vector2(200, 200);
+                    break;
                 }
-                */
+                
                 if (collisionMap[nextYTile, nextXTile] == 1)
                 {
                     PushBack += middlePoint - Corners[corner];
@@ -174,11 +177,8 @@ namespace ModularHell
             if (PushBack != Vector2.Zero)
             {
                 PushBack.Normalize();
-                PushBack *= 200;
-                _velocity = PushBack;
+                StepMove = PushBack;
             }
-
-            Vector2 StepMove = Vector2.Multiply(_velocity, (float)gameTime.ElapsedGameTime.TotalSeconds);
 
 
             _position += StepMove;
@@ -208,9 +208,10 @@ namespace ModularHell
                 this.frame = 0;
                 this.transitionFrame = 0;
             }
-
+            previousState = characterState;
             if (this.isMoving)
             {
+                ch
                 this.LoadAnimation("Walk", ref cam, spriteBatch, gameTime);
             }
             else
