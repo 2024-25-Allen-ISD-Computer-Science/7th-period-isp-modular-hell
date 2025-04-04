@@ -76,8 +76,14 @@ namespace ModularHell
             //spriteBatch.Draw(ballTexture, ScreenManager.Instance.MiddleScreen, Color.White);
 
             Vector2 camPos = Camera1.Position;
-            Player1.Draw(spriteBatch, gameTime, ref Camera1);
-            Enemy.Draw(spriteBatch, gameTime, ref Camera1);
+
+            if (Player1._position.Y <= Enemy._position.Y) {
+                Player1.Draw(spriteBatch, gameTime, ref Camera1);
+                Enemy.Draw(spriteBatch, gameTime, ref Camera1);
+            } else {
+                Enemy.Draw(spriteBatch, gameTime, ref Camera1);
+                Player1.Draw(spriteBatch, gameTime, ref Camera1);
+            }
 
             if (ScreenManager.Instance.Debug) {
                 spriteBatch.DrawString(fontArial, Player1._position.ToString(), Vector2.Zero, Color.LightGreen);
