@@ -22,12 +22,15 @@ namespace ModularHell
         public Character() : base() {}
 
         public Character(int slots = 0) : base(slots) {}
+        [XmlIgnore]
+        public List<Object> Summons;
 
 
 
         public override void LoadContent()
         {
             base.LoadContent();
+            Summons = new List<Object>();
         }
 
         public override void UnloadContent()
@@ -38,6 +41,9 @@ namespace ModularHell
         public override void Update(GameTime gameTime, ref int[,] collisionMap) {
             doMovement();
             base.Update(gameTime, ref collisionMap);
+            foreach (Object summon in Summons){
+                summon.Update(gameTime);
+            }
 
            // foreach (EntityAttachment attachment in _attachmentSlots)
            //     attachment.Update(gameTime);
@@ -48,7 +54,10 @@ namespace ModularHell
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, ref Camera cam)
         {
             base.Draw(spriteBatch, gameTime, ref cam);
-            
+            foreach (Object summon in Summons){
+                summon.Draw(ref cam, spriteBatch);
+            }
+
         }
 
         private void doMovement() 
@@ -76,6 +85,11 @@ namespace ModularHell
             if (AccelerationVector != Vector2.Zero) {
                 AccelerationVector.Normalize();
                 this.isMoving = true;
+                if (AccelerationVector.X > 1) {
+                    facing = "right";
+                } else if (AccelerationVector.X < 1) {
+                    facing = "left";
+                }
                 _velocity += AccelerationVector * _movementAcceleration;
             }
 
@@ -89,5 +103,15 @@ namespace ModularHell
                 
         }
 
+        
+        public override void CheckForTrigger(ref Camera cam) {
+            if (InputHandler.HoldingKey(Keys.F)) {
+                Vector2 shootVec = cam.ScreenToWorldPosition(InputHandler.MousePosition) - _position;
+                shootVec.Normalize();
+                Object fireball = new Object(_position, shootVec * 30);
+                fireball.LoadContent();
+                Summons.Add(fireball);
+            }
+        }
     };
 };

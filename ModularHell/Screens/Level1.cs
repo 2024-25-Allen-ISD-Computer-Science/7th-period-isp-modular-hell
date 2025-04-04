@@ -66,6 +66,7 @@ namespace ModularHell
             
             Player1.Update(gameTime, ref PlayMap.collisionMap);
             Camera1.Position = Player1._position + new Vector2(Player1.Dimensions.X * Camera1.Scale / 2, Player1.Dimensions.Y * Camera1.Scale);
+            Enemy.Update(gameTime, ref PlayMap.collisionMap);
             Camera1.Update();
         }
 

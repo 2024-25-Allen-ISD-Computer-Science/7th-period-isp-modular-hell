@@ -48,6 +48,8 @@ namespace ModularHell
         public int frameRate = 20;
         [XmlIgnore]
         public Keyframe previousKeyframe = null;
+        [XmlIgnore]
+        public string facing = "right";
 
         public Entity()
         {
@@ -97,6 +99,7 @@ namespace ModularHell
         {
             PhysicsRect = new Rectangle((int)_position.X, (int)_position.Y, (int)Dimensions.X, (int)Dimensions.Y);
             DoPhysics(gameTime, ref collisionMap);
+            //CheckForTrigger();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, ref Camera cam)
@@ -114,6 +117,9 @@ namespace ModularHell
                 spriteBatch.Draw(_entityTexture, screenPosition, TextureRect, Color.White, 0f, Vector2.Zero, cam.Scale, SpriteEffects.None, 0.2f);
             }
             */
+
+            //THIS IS TEMP FOR CAMERA.THIS MUST CHANGE
+            CheckForTrigger(ref cam);
         }
 
         public virtual void Generate()
@@ -208,14 +214,14 @@ namespace ModularHell
                 this.frame = 0;
                 this.transitionFrame = 0;
             }
-            previousState = characterState;
+
             if (this.isMoving)
             {
-                ch
                 this.LoadAnimation("Walk", ref cam, spriteBatch, gameTime);
             }
             else
             {
+
                 this.LoadAnimation("Idle", ref cam, spriteBatch, gameTime);
             }
         }
@@ -230,6 +236,10 @@ namespace ModularHell
                     method.Invoke(this, [this, cam, spriteBatch, Convert.ToInt32((float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond)]);
                 }
             }
+        }
+
+        public virtual void CheckForTrigger(ref Camera cam) {
+
         }
 
     }

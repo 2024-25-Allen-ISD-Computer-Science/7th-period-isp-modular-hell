@@ -13,7 +13,7 @@ namespace ModularHell
     public class Enemy : Entity
     {
 
-        private int _movementAcceleration = 200;
+        private int _movementAcceleration = 100;
 
         [XmlIgnore]
         public Torso NeckSlot;
@@ -22,6 +22,19 @@ namespace ModularHell
         public Enemy() : base() {}
 
         public Enemy(int slots = 0) : base(slots) {}
+        [XmlIgnore]
+        int walkTime = 0;
+        [XmlIgnore]
+        int walkGoalTime = 0;
+        enum WalkChoices {
+            North,
+            South,
+            East,
+            West,
+            Stay
+        }
+        [XmlIgnore]
+        WalkChoices direction;
 
 
 
@@ -54,8 +67,43 @@ namespace ModularHell
         private void doMovement() 
         {
             this.isMoving = false;
+
             Vector2 AccelerationVector = Vector2.Zero;
+            if (walkTime == walkGoalTime) {
+                Random random = new Random();
+                // Get all enum values
+                Array enumValues = Enum.GetValues(typeof(WalkChoices));
+                // Pick a random value
+                direction = (WalkChoices)enumValues.GetValue(random.Next(enumValues.Length));
+                walkGoalTime = random.Next(100);
+                walkTime = 0;
+            } else {
+                walkTime += 1;
+            }
             
+            switch (direction) {
+                case WalkChoices.North:
+                    AccelerationVector.Y = -1;
+                    isMoving = true;
+                    break;
+                case WalkChoices.South:
+                    AccelerationVector.Y = 1;
+                    isMoving = true;
+                    break;
+                case WalkChoices.East:
+                    AccelerationVector.X = 1;
+                    isMoving = true;
+                    break;
+                case WalkChoices.West:
+                    AccelerationVector.X = -1;
+                    isMoving = true;
+                    break;
+                case WalkChoices.Stay:
+                    isMoving = false;
+                    break;
+            }
+            
+            _velocity += AccelerationVector * _movementAcceleration;
 
             if (isMoving) {
                 this.previousState = this.characterState;
